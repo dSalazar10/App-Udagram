@@ -161,25 +161,13 @@ Authorized:
 - test posting an image with valid credentials and a malformed payload
 - test posting an image with valid credentials and valid payload
 
-## Deployment
+## Cloud Deployment
 
-Add additional notes about how to deploy this on a live system
+@TODO: Complete Cloud Deployment Tutorial
 
-You can deploy this server to the cloud using Amazon Web Services. Instructions to sign up can be 
-found [here](https://portal.aws.amazon.com/billing/signup#/).
+## Running the Cloud Tests
 
-Interfacing with AWS can be done through the terminal, which will require AWS CLI. Installation instructions can
-be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
-
-* To test if AWS CLI is installed, execute the following code in your terminal: `aws --version`
-
-## Running the cloud tests
-
-@TODO Finish cloud testing tutorial
-
-Explain how to run the automated tests
-Explain what is being tested and why
-Give examples
+@TODO Complete Cloud Testing Tutorial
 
 ## Built With
 
@@ -193,6 +181,7 @@ services.
 * [connect](https://www.npmjs.com/package/connect) library helps us glue together middleware.
 * [email-validator](https://www.npmjs.com/package/email-validator) library helps us validate emails.
 * [body-parser](https://github.com/expressjs/body-parser) helps us parse, remove, and make use of inbound requests.
+* [sentry](https://sentry.io/signup/) library helps us with analytics and crash reports.
 
 ## Authors
 This repo was forked from Udacity's GitHub page as per the assignment
@@ -206,4 +195,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Acknowledgments
 
-* Hat tip to [Gabe Ruttner](https://github.com/grutt) for teaching the lesson and providing the instructions to complete the assignments.
+* Hat tip to [Gabe Ruttner](https://github.com/grutt) for teaching the Full Stack Apps on AWS course.
