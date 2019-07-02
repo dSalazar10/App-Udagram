@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
-    "dev": "ts-node-dev --respawn --transpileOnly src/old_server.ts"
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -24,18 +24,30 @@
     "@types/bluebird": "^3.5.27",
     "@types/express": "^4.16.1",
     "@types/node": "^11.13.11",
+    "@types/sequelize": "^4.27.44",
+    "@types/validator": "^10.9.0",
     "ts-node-dev": "^1.0.0-pre.39",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "dependencies": {
+    "@angular/compiler": "^8.0.3",
+    "@angular/core": "^8.0.3",
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.3.2",
     "bcrypt": "^3.0.6",
+    "codelyzer": "^5.1.0",
     "email-validator": "^2.0.4",
+    "body-parser": "^1.18.3",
+    "marked": "^0.6.2",
     "express": "^4.17.0",
     "jimp": "^0.6.4",
     "jsonwebtoken": "^8.5.1",
-    "sequelize-typescript": "^0.6.11"
+    "pg": "^7.11.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.2",
+    "sequelize": "^5.9.2",
+    "sequelize-typescript": "^0.6.11",
+    "zone.js": "^0.9.1"
   }
 }

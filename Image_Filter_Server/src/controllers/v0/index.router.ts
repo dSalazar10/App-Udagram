@@ -1,9 +1,11 @@
 import { Router, Request, Response } from 'express';
 import { UserRouter } from './users/routes/user.router';
+import { FilterRouter } from './filters/routes/filter.router';
 
 const router: Router = Router();
 
 router.use('/users', UserRouter);
+router.use('/filters', FilterRouter);
 
 router.get('/', async (req: Request, res: Response) => {
     res.send(`V0`);
