@@ -181,6 +181,7 @@ services.
 * [connect](https://www.npmjs.com/package/connect) library helps us glue together middleware.
 * [email-validator](https://www.npmjs.com/package/email-validator) library helps us validate emails.
 * [body-parser](https://github.com/expressjs/body-parser) helps us parse, remove, and make use of inbound requests.
+* [sentry](https://sentry.io/signup/) library helps us with analytics and crash reports.
 
 ## Authors
 This repo was forked from Udacity's GitHub page as per the assignment
