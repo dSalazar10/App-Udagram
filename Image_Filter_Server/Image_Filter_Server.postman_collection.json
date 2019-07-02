@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "e476c8a0-01c7-4161-92a4-71961c91fd42",
+		"_postman_id": "943029a6-753a-410c-bc46-6a0a388d61f9",
 		"name": "Image_Filter_Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Filter image from localhost",
+			"name": "authorized-valid /filteredimage?image_url",
 			"event": [
 				{
 					"listen": "test",
@@ -23,12 +23,22 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjA5OTE5N30.tpLyGRjNK8IlPzZovMptucUQ_yX4D2_Qi23g-vs5CcI",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/filteredimage?image_url={{SITE}}",
+					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
 					"host": [
-						"{{HOST}}"
+						"{{host}}"
 					],
 					"path": [
 						"filteredimage"
@@ -45,28 +55,32 @@
 			"response": []
 		},
 		{
-			"name": "Filter image from EB",
+			"name": "unauthorized-valid /filteredimage?image_url",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "7cea7049-a30d-4ec8-b7ce-8b569609cdf9",
+						"id": "90982951-6cba-41d6-9f43-8ca3ea0bcf06",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{EB_HOST}}/filteredimage?image_url={{SITE}}",
+					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
 					"host": [
-						"{{EB_HOST}}"
+						"{{host}}"
 					],
 					"path": [
 						"filteredimage"
@@ -77,11 +91,53 @@
 							"value": "{{SITE}}"
 						}
 					]
+				},
+				"description": "Process a query of a url, filter the image if it exists, send it to user, and delete the file on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
 				}
 			},
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjA4MTY4NH0.kr_bfqD6X3y3ZhSNERYdMvVILQd4mxgpIFAb5iuz5js",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -106,20 +162,20 @@
 	],
 	"variable": [
 		{
-			"id": "6b48db73-23f5-438b-a209-9a22baecbb0b",
-			"key": "HOST",
+			"id": "7dd2c10c-2413-4558-8a0c-60e9cb3b11cd",
+			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "1a8238e2-c101-4272-8efc-f9ce297ad471",
+			"id": "34e8f3a7-f100-44be-af20-c50586afa7f0",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "ede136df-e30d-4b79-80b7-137c619ccfab",
-			"key": "EB_HOST",
+			"id": "0b30e724-bd13-4de3-b167-89ea1a0801a8",
+			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		}
