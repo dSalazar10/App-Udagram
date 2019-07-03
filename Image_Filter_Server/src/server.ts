@@ -11,6 +11,9 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
   // Set the network port
   const port = process.env.PORT || 8082;
 
+  // Validate URL
+  const isImageUrl = require('is-image-url');
+
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
   
@@ -44,20 +47,36 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     }
 
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.query.image_url;
+
     // validate the image_url query
-    if ( !image_url ) {
+    if ( !image_url || !isImageUrl(image_url) ) {
       res.status(400).send(`image_url required`);
     }
-    const img_url = req.query.image_url;
+
     // Filter the image
-    await filterImageFromURL(img_url).then(async(data) => {
-      // Send the resulting file in the response
-      res.sendFile(data, {}, function (err) {
-        // Deletes any files on the server on finish of the response
-        deleteLocalFiles([data]);
-      })
+    const filteredImage = await filterImageFromURL(image_url).catch( (err) => {
+      if (err) {
+        return res.status(400).send(`bad image_url`);
+      }
     });
+    const data: string = filteredImage as string;
+    // Send the resulting file in the response
+    res.sendFile(data, {}, function (err) {
+      if (err) {
+        throw err;
+      } else {
+        // Deletes any files on the server on finish of the response
+        deleteLocalFiles([data]).catch( (err) => {
+          if (err) {
+            return res.status(400).send(`bad image_url`);
+          }
+        });
+      }
+
+      // End sendFile
+    });
+
   });
 
   // Start the Server
