@@ -20,5 +20,6 @@ Tasks completed:
 
 4) Deploying a secong Nodejs/Express RestAPI server with the Image_Filter_Server
 - Image processing with Jimp based on RESTful queries
+- Added features include basic authentication and URL validation
 
 Click into each of the folders for more information.
