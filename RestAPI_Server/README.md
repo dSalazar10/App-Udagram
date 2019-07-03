@@ -1,79 +1,245 @@
-# Udagram Image Filtering Microservice
+# RestAPI Server
 
-Udagram is a simple cloud application developed alongside the Udacity Cloud Engineering Nanodegree. It allows users to register and log into a web client, post photos to the feed, and process photos using an image filtering microservice.
+The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
+* Manages user authentication, storing emails and password hashes in an AWS Relational Database Service (DB)
+* Manages user data, storing images in an AWS Simple Storage Service (FS)
+* Manages image filters using the Image_Filter_Server (top server)
+![](Server_Overview.png)
 
-The project is split into three parts:
-1. [The Simple Frontend](https://github.com/grutt/udacity-c2-frontend)
-A basic Ionic client web application which consumes the RestAPI Backend. 
-2. [The RestAPI Backend](https://github.com/grutt/udacity-c2-restapi), a Node-Express server which can be deployed to a cloud service.
-3. [The Image Filtering Microservice](https://github.com/grutt/udacity-c2-image-filter), the final project for the course. It is a Node-Express application which runs a simple Python script to process images.
-
-## Tasks
-### Setup Python Environment
-You'll need to set up and use a virtual environment for this project.
-
-To create a virtual environment run the following from within the project directory:
-1. Install virtualenv dependency: `pip install virtualenv`
-2. Create a virtual environment:    `virtualenv venv`
-3. Activate the virtual environment: `source venv/bin/activate` (Note: You'll need to do this every time you open a new terminal)
-4. Install dependencies: `pip install -r requirements.txt`
-
-When you're done working and leave the virtual environment, run: `deactivate`
-
-### Setup Node Environment
-You'll need to create a new node server. Open a new terminal within the project directory and run:
-1. Initialize a new project: `npm init`
-2. Install express: `npm i express --save`
-3. Install typescript dependencies: `npm i ts-node-dev tslint typescript  @types/bluebird @types/express @types/node --save-dev`
-4. Look at the `package.json` file from the RestAPI repo and copy the `scripts` block into the auto-generated `package.json` in this project. This will allow you to use shorthand commands like `npm run dev`
-
-### Create a new server.ts file
-Use our basic server as an example to set up this file. For this project, it's ok to keep all of your business logic in the one server.ts file, but you can try to use feature directories and app.use routing if you're up for it. Use the RestAPI structure to guide you.
-
-### Add an endpoint to handle POST /imagetoprocess requests
-It should accept two POST parameter:
->    image_url: string - a public URL of a valid image file
-
->    upload_image_signedUrl: string (OPTIONAL) - a URL which will allow a PUT request with the processed image
-    
-It should respond with 422 unprocessable if either POST parameters are invalid.
-
-It should require a token in the Auth Header or respond with 401 unauthorized.
-
-It should be versioned.
-
-> The matching token should be saved as an environment variable
-    
-> (TIP we broke this out into its own auth.router before, but you can access headers as part of the req.headers within your endpoint block)
-
-It should respond with the image as the body if upload_image_signedUrl is included in the request.
-
-It should respond with a success message if upload_image_signedUrl is NOT included in the request.
+### Prerequisites
 
 
-### Refactor your RestApi server
-#### Add a request to the image-filter server within the RestAPI POST feed endpoint
+* Nodejs and NPM
+* Postman
+* Postbird
+* Visual Studio Code
+* Amazon Web Services Account
+* AWS CLI
 
-It should create new SignedURLs required for the imagetoprocess POST Request body.
+### Installing
 
-It should include a POST request to the new server (TIP keep the server address and token as environment variables).
+The server is dependent on Nodejs and Node Package Manager. 
+* Installation instructions can be found [here](https://nodejs.org/en/download/)
+* To test if Nodejs is installed, execute the following code in your terminal: `npm -v`
 
-It should overwrite the image in the bucket with the filtered image (in other words, it will have the same filename in S3).
+We can issue and save requests to the server with ease using Postman. 
+* Installation instruction can be found [here](https://www.getpostman.com/downloads/).
+
+We can interact with our database with ease using Postbird.
+* Installation instructions can be found [here](https://github.com/paxa/postbird).
+
+We can interact with our repo with ease using Visual Studio Code.
+* Installation instructions can be found [here](https://code.visualstudio.com/docs/setup/setup-overview).
+
+We will be using multiple services provided by Amazon Web Services, so you will need to set up an account.
+* Instructions can be found [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+
+We will be interacting with our AWS services using the command line, so you will need the AWS CLI
+* Instructions can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and 
+testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Setting up the database
+
+* Go to the main page of AWS [here](https://aws.amazon.com).
+* Sign into your console
+* Click the Services button.
+* Search for RDS and click RDS
+![](./tutorial/L4-1.png)
+* Click ‘Create Database’
+![](./tutorial/L4-2.png)
+  - Select PostGres SQL
+  - Check the radio button “Only enable options eligible for RDS Free Usage Tier”
+  - Click next
+  ![](./tutorial/L4-3a.png)
+* Database Details:
+  - Keep the Instance Specifications at their default settings. Be sure that your DB instance class is ‘db.t2.micro’
+  ![](./tutorial/L4-4a.png)
+  - Settings - Enter a DB Instance Identifier, a Master username, and Master password
+    ![](./tutorial/L4-4b.png)
+  - Network & Security - set Public accessibility to yes and keep the rest of the settings default
+    ![](./tutorial/L4-4c.png)
+  - Database options - enter a database name and keep the rest default
+    ![](./tutorial/L4-4d.png)
+  - Backup – keep everything default
+  - Monitoring – keep everything default
+  ![](./tutorial/L4-4e.png)
+  - Performance Insights - keep everything default
+  - Log exports – select Postgresql log
+  - Maintenance - keep everything default
+  - Delete Protection – be sure the radio button is checked and click Create Database
+  ![](./tutorial/L4-4h.png)
+  - Navigate to the database to obtain the endpoint url
+  ![](./tutorial/L4-4i.png)
+  
+### Setting up Postbird
+
+* Open Postbird
+![](./tutorial/L5-1.png)
+* Copy and paste the endpoint, username, password, and database name
+![](./tutorial/L5-2.png)
+* Click the “Save & Connect” button
+![](./tutorial/L5-3.png)
+* Now your Database setup is complete. Great job!
 
 
-### Deploying your system!
-Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service!
+### Setting up the Filestore
+
+* On the main page of AWS, click Services and search for S3
+* Click S3
+![](./tutorial/L6-1.png)
+* Click ‘Create Bucket’
+  - Enter in a domain wide unique bucket name and your region, and click next
+  ![](./tutorial/L6-3a.png)
+  - Click the radio box to turn on “Automatically encrypt objects when they are stored in S3” and set it to AES-256, and click 
+  next
+  ![](./tutorial/L6-3c.png)
+  - Make sure that the radio box is selected for “Block all public access”.
+  ![](./tutorial/L6-3e.png)
+  - We will be using a signedURL pattern to provide access indirectly
+  ![](./tutorial/L6-3f.png)
+  - Click next, review, and then click create
+* Open the bucket by clicking on its name
+![](./tutorial/L6-4.png)
+* Click the permissions tab at the top
+![](./tutorial/L6-5.png)
+  - Click CORS configuration
+  ![](./tutorial/L6-5a.png)
+  - A configuration file is located in the RestAPI Server folder 
+  [here]( https://github.com/dSalazar10/App-Udagram/blob/dev/RestAPI_Server/RestAPI.CORS_policy.xml). 
+  - Copy and paste the XML code into the development environment
+  ![](./tutorial/L6-5c.png)
+  - Click Save
+
+### Setting up an AWS User Account
+
+* Navigate to the AWS home page and search services for IAM
+![](./tutorial/L7-1.png)
+* Click the ‘Users’ button in the navigation bar on the left
+* Click the ‘Add user’ button
+* Type in a new user name
+* Click the ‘Programmatic access’ radio button
+![](./tutorial/L7-5.png)
+* Click next
+* Click the ‘Create group’ button
+![](./tutorial/L7-7.png)
+* Click the ‘Create policy’ button
+![](./tutorial/L7-8.png)
+  - Click the ‘Choose a Service’ button 
+  ![](./tutorial/L7-8a.png)
+  - Type in “S3” and click the S3 button
+  - Click the ‘All S3 actions (s3:*)’ radio button
+  ![](./tutorial/L7-8c.png)
+  - Click the ‘Response’ tab
+  - Click the ‘bucket’ tab’s ‘Add ARN’ button
+  ![](./tutorial/L7-8e.png)
+  - Enter your S3 bucket name in the text box and click ‘Add’
+  ![](./tutorial/L7-8f.png)
+  - Click the ‘object’ tab’s ‘Add ARN’ button
+  - Enter your S3 bucket name for the ‘bucket name’ field
+  - Click the ‘Any’ radio button for the ‘object name’ field
+  ![](./tutorial/L7-8i.png)
+  - Click ‘Add’ 
+  - Click ‘Review Policy’
+  - Add a name for your policy
+  ![](./tutorial/L7-8l.png)
+  - Click ‘Create Policy’
+* Now go back to the tab you started in and enter the policy name you just created
+![](./tutorial/L7-9.png)
+* Enter a name for your group
+* Click the refresh button and search for the policy you just created
+* Click the radio button next to your policy and click ‘Create Group’
+* Click ‘Next’
+* Click ‘Next’
+* Click ‘Create User’
+* Click the ‘Download .csv’ button to download your credentials
+![](./tutorial/L7-16.png)
+* Click ‘Close’
+* For instructions on how to configure the Amazon Web Services Command Line Interface (aws-cli) go 
+[here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 
-## Stand Out
-#### Postman Integration Tests
-Try writing a postman collection to test your endpoint. Be sure to cover:
-> POST requests with and without tokens
-> POST requests with valid and invalid parameters
+### Setting up the local server
 
-#### Refactor Data Models
-Try adding another column to your tables to save a separate key for your filtered image. Remember, you'll have to rename the file before adding it to S3!
+* Clone the repo
+![](./tutorial/L2-2.png)
+* Open the RestAPI_Server folder in Visual Studio Code
+![](./tutorial/L2-3.png)
+* Open a new terminal in Visual Studio Code
+* To install the project’s dependencies, type in `npm i` and press enter
+![](./tutorial/L2-5.png)
+* To start the server, type in `npm run dev`
+![](./tutorial/L2-6.png)
+* The server can be located at `http://localhost:8080`
 
-#### (ADVANCED) Refactor Data Models
-Try adding a second OpenCV filter script and add an additional parameter to select which filter to use as a POST parameter
+## Running the local tests
 
+* Open Postman and close the startup menu
+* Type in ` http://localhost:8080/` and hit send
+![](./tutorial/L3-2.png)
+  * Here we see the root response telling us that the api is located at /api/v0/
+* You can import the provided test collections
+  * Click the ‘Import’ button in the upper left
+  ![](./tutorial/L3-3a.png)
+  * Click the ‘Choose Files’ button
+  ![](./tutorial/L3-3b.png)
+  * Navigate to the RestAPI Server folder `App-Udagram-master > RestAPI_Server`
+  * Open ‘RestAPI.postman_collection.json’ file
+  ![](./tutorial/L3-3d.png)
+  * Click the ‘Collections’ button, below the ‘Import’ button
+  ![](./tutorial/L3-3e.png)
+  * Here you will find three folders to test different features
+
+Public:
+- test getting all the images in the feed
+- test getting a specific image
+- test creating a new user with valid credentials
+- test creating a new user with invalid credentials
+- test loggin in with valid credentials
+- test loggin in with invalid credentials
+
+Unauthorized:
+- test posting an image with invalid credentials
+
+Authorized: 
+- test posting an image with valid credentials and a malformed payload
+- test posting an image with valid credentials and valid payload
+
+## Cloud Deployment
+
+@TODO: Complete Cloud Deployment Tutorial
+
+## Running the Cloud Tests
+
+@TODO Complete Cloud Testing Tutorial
+
+## Built With
+
+* [sequelize-typescript](https://www.npmjs.com/package/sequelize-typescript) a promise-based Node.js + typescrpt 
+Object-Relational Mapping for PostgresSQL.
+* [AWS CLI](https://aws.amazon.com/cli/) helps us manage our S3 and Elastic Beanstalk
+services.
+* [express](https://expressjs.com) framework helps us build our webserver. 
+* [bcrypt](https://www.npmjs.com/package/bcrypt) library helps us hash passwords.
+* [JsonWebToken](https://github.com/auth0/node-jsonwebtoken) library helps us manage tokens.
+* [connect](https://www.npmjs.com/package/connect) library helps us glue together middleware.
+* [email-validator](https://www.npmjs.com/package/email-validator) library helps us validate emails.
+* [body-parser](https://github.com/expressjs/body-parser) helps us parse, remove, and make use of inbound requests.
+* [sentry](https://sentry.io/signup/) library helps us with analytics and crash reports.
+
+## Authors
+This repo was forked from Udacity's GitHub page as per the assignment
+[udacity/cloud-developer](https://github.com/udacity/cloud-developer/tree/master/course-02)
+* Udacity Cloud Developer authors: **[Udacity](https://github.com/eddyudacity)** and **[Michele Cavaioni](https://github.com/Udacavs)** for their *initial work*
+* Udacity Cloud Developer student: **dSalazar10** for my participation in the exercises
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/dSalazar10/App-Udagram/blob/master/LICENSE) file for details
+
+## Acknowledgments
+
+* Hat tip to [Gabe Ruttner](https://github.com/grutt) for teaching the Full Stack Apps on AWS course.

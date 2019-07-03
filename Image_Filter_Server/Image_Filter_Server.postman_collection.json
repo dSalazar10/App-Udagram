@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "943029a6-753a-410c-bc46-6a0a388d61f9",
+		"name": "Image_Filter_Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authorized-valid /filteredimage?image_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unauthorized /filteredimage?image_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authorized {cloud}/filteredimage?image_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{eb_host}}/filteredimage?image_url={{SITE}}",
+					"host": [
+						"{{eb_host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unauthorized {cloud}/filteredimage?image_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{eb_host}}/filteredimage?image_url={{SITE}}",
+					"host": [
+						"{{eb_host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjA4MTY4NH0.kr_bfqD6X3y3ZhSNERYdMvVILQd4mxgpIFAb5iuz5js",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5887df52-1889-4e1f-82ee-054ab37b450a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5e332dfe-c833-430b-b947-ab6c00311c28",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b01b1e1e-ae6e-4500-9e6b-dd84bbd18af8",
+			"key": "host",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"id": "519f7447-be2d-4bf1-b574-0fa603a6737b",
+			"key": "SITE",
+			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+			"type": "string"
+		},
+		{
+			"id": "ac2fbe30-69c5-49af-96cb-dc40654a7fe9",
+			"key": "eb_host",
+			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
+			"type": "string"
+		}
+	]
+}

@@ -2,8 +2,10 @@ import { Router, Request, Response } from 'express';
 import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
+import {config} from '../../../../config/config';
 
 const router: Router = Router();
+const axios = require('axios');
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
@@ -26,32 +28,35 @@ router.get('/:id', async (req: Request, res: Response) => {
     res.send(item);
 });
 
-// update a specific resource
+// Update a specific resource
+// This was given as an exercise
 router.patch('/:id', requireAuth, async (req: Request, res: Response) => {
     // Required id parameter
     const { id } = req.params;
-    // Check if id is valid
+    // Verify parameters
     if ( !id ) {
         return res.status(400).send(`id is required.`);
     }
+    // Required JSON body
     const caption = req.body.caption;
     const fileName = req.body.url;
-    // check Caption is valid
+    // Verify caption
     if (!caption) {
         return res.status(400).send({ message: 'Caption is required or malformed' });
     }
-    // check Filename is valid
+    // Verify fileName
     if (!fileName) {
         return res.status(400).send({ message: 'File url is required' });
     }
-    // Find item
-    const item = await FeedItem.findByPk(id);
-    // Update item
-    item.caption = caption;
-    item.url = AWS.getPutSignedUrl(fileName);
-    item.updatedAt = new Date();
-    // Return item
-    res.status(200).send(item);
+    // Find item based on the search parameter
+    const item: FeedItem = await FeedItem.findByPk(id);
+    // Update the caption and url
+    const updated_item = await item.update({
+        'caption': caption,
+        'url': fileName
+    });
+    updated_item.url = AWS.getGetSignedUrl(updated_item.url);
+    res.status(200).send(updated_item);
 });
 
 
@@ -83,9 +88,7 @@ router.post('/', requireAuth, async (req: Request, res: Response) => {
             caption: caption,
             url: fileName
     });
-
     const saved_item = await item.save();
-
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
     res.status(201).send(saved_item);
 });

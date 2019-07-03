@@ -1,62 +1,82 @@
-# udacity-c2-basic-server
+# Practice Server
 
-This is a simple node-express server to explore and understand the Request-Response pattern.
+PracticeServer is a simple Node.JS server meant to help familiarize ourselves with the node environment and
+dealing with dependencies.
 
-***
-## Getting Setup
+## Getting Started
 
-### Installing project dependencies
+These instructions will get you a copy of the project up and running on your local machine for development and 
+testing purposes. See deployment for notes on how to deploy the project on a live system
+* Fork the Udagram repo
+* Clone to your computer
+* Navigate a terminal to the Practice_Server directory
 
-This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the root of this repository. After cloning, open your terminal and run:
-```bash
-npm install
+The server is dependent on Nodejs and Node Package Manager. 
+* Installation instructions can be found [here](https://nodejs.org/en/download/)
+* To test if Nodejs is installed, execute the following code in your terminal: `npm -v`
+* Now that you have node installed, type in the following and press enter `npm run i && npm run dev`
+* Now the server is up and running. Great job!
+
+We can issue and save requests to the server with ease using Postman. 
+* Installation instruction can be found [here](https://www.getpostman.com/downloads/).
+
+### Prerequisites
+
+
+
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Once you have Node and Postman installed, you are ready to start up a local server.
+* Open a terminal
+* Navigate to the Practice_Server directory
+* Install the dependencies: type the following and press enter `npm install`
+* Spin up the server: type the following and press enter `npm run dev`
+
+Now your server is up and running. See the Running the tests docs for more information on testing the server.
+
+## Running the tests
+
+Now you should be ready to interact with your local server using Postman.
+* A Postman collection named Practice_Server.postman_collection.json is located in the root directory of Practice_Server.
+* Open Postman and close the simple menu that pops up
+* Click the Import button located in the top left corner of the app
+* Import the postman_collection.json file
+
+You will see a new folder has been added to the collections list on the left.
+If you click on the folder, you will be presented with a list of examples and exercises.
+
+To run a single test:
 ```
->_tip_: **npm i** is shorthand for **npm install**
-
-### Installing useful tools
-#### 1. [Postbird](https://github.com/paxa/postbird)
-Postbird is a useful client GUI (graphical user interface) to interact with our provisioned Postgres database. We can establish a remote connection and complete actions like viewing data and changing schema (tables, columns, ect).
-
-#### 2. [Postman](https://www.getpostman.com/downloads/)
-Postman is a useful tool to issue and save requests. Postman can create GET, PUT, POST, etc. requests complete with bodies. It can also be used to test endpoints automatically. We've included a collection (`./udacity-c2-restapi.postman_collection.json `) which contains example requsts.
-
-***
-
-## Running the Server Locally
-To run the server locally in developer mode, open terminal and run:
-```bash
-npm run dev
+* Be sure that your server is running. If not, run the following command `npm run dev`
+* Back in Postman, click any of the listed requests on the left side
+* Click the blue Send button on the right side
 ```
 
-Developer mode runs off the TypeScript source. Any saves will reset the server and run the latest version of the codebase. 
+For example:
+```
+* Making a GET request of "http://localhost:8082/" to the server
+* Responds with "Welcome to the Cloud!"
+```
 
-***
-## Important Files and Project Structure
+## Built With
 
-The source code for this demo resides in the ./src directory.
+* [Express](https://expressjs.com) framework helps us build our webserver. 
+* [body-parser](https://github.com/expressjs/body-parser) helps us parse, remove, and make use of inbound requests.
+* [Mocha](https://mochajs.org) framework help us with unit testing.
+* [Chai](https://www.chaijs.com) framework help us with unit testing.
 
-### src/server.ts
-The main code for this demo is located in the ./src/server.ts file. This includes 
+## Authors
+This repo was forked from Udacity's GitHub page as per the assignment
+[udacity/cloud-developer](https://github.com/udacity/cloud-developer/tree/master/course-02)
+* Udacity Cloud Developer authors: **[Udacity](https://github.com/eddyudacity)** and **[Michele Cavaioni](https://github.com/Udacavs)** for their *initial work*
+* Udacity Cloud Developer student: **dSalazar10** for my participation in the exercises
 
-### src/cars.ts
-This is a javascript object containing a list of cars. This will be useful for providing data for our simple endpoints.
+## License
 
-### src/unit-test-examples/
-This directory contains some simple unit functions (`units.ts`) and corresponding tests using Mocha and Chai (`units.tests.ts`).
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/dSalazar10/App-Udagram/blob/master/LICENSE) file for details
 
-***
-# Tasks
-1. @TODO `./src/server.ts/`
-Add an endpoint to GET a list of cars.
+## Acknowledgments
 
-2. @TODO `./src/server.ts/` 
-Add an endpoint to get a specific car.
-
-3. @TODO `./src/server.ts/` 
-Add an endpoint to post a new car to our list.
-
-4. @TODO `./src/unit-test-examples/units.ts`
-Try creating a method "concat" to concatenate two strings.
-
-5. @TODO `./src/unit-test-examples/units.tests.ts`
-Try creating a new describe block for the "concat" method.
+* Hat tip to [Gabe Ruttner](https://github.com/grutt) for teaching the lesson and providing the instructions to complete the assignments.

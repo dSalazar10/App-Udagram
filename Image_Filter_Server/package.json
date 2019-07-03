@@ -29,6 +29,7 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
+    "email-validator": "^2.0.4",
     "express": "^4.17.0",
     "jimp": "^0.6.4"
   }

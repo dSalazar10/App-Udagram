@@ -1,6 +1,7 @@
 import express, { Request, Response, Router } from "express";
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import * as EmailValidator from 'email-validator';
+import { filterImageFromURL, deleteLocalFiles } from './util/util';
 
 (async () => {
 
@@ -20,7 +21,28 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   } );
 
   // endpoint to filter an image from a public url
-  app.get( "/filteredimage/", async ( req: Request, res:Response ) => {
+  app.get( "/filteredimage", async ( req: Request, res:Response ) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    // check email is valid
+    if (!email || !EmailValidator.validate(email)) {
+      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
+    }
+
+    // check email password valid
+    if (!password) {
+      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
+    }
+    // VERY BAD - storing a single user/pass in proc env and compare in memory
+    // A cheap way to block public access
+    // @TODO: upgrade security
+    if (email !== process.env.ISERVER_USER) {
+      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
+    }
+    if (password !== process.env.ISERVER_PASSWORD) {
+      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
+    }
+
     // URL of a publicly accessible image
     const { image_url } = req.query;
     // validate the image_url query
@@ -28,12 +50,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       res.status(400).send(`image_url required`);
     }
     const img_url = req.query.image_url;
-    // call filterImageFromURL(image_url) to filter the image
-    const filteredPath = await filterImageFromURL(img_url);
-    // return the filtered image file
-    res.status(200).send(filteredPath);
-    // deletes any files on the server on finish of the response
-    await deleteLocalFiles(Array<string>(filteredPath));
+    // Filter the image
+    await filterImageFromURL(img_url).then(async(data) => {
+      // Send the resulting file in the response
+      res.sendFile(data, {}, function (err) {
+        // Deletes any files on the server on finish of the response
+        deleteLocalFiles([data]);
+      })
+    });
   });
 
   // Start the Server
