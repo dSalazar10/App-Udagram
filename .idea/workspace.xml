@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b3e125a2-0c73-4de6-9fdd-718c6b58720c" name="Default Changelist" comment="Update Image_Filter_Server">
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/e2e/protractor.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/e2e/src/app.e2e-spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/e2e/src/app.po.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/e2e/tsconfig.e2e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/ionic.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End_Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End_Server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/api/api.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/api/api.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/app-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-login/auth-login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-login/auth-login.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-login/auth-login.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-login/auth-login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-button.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-button.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-button.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-button.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-user/auth-menu-user.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-user/auth-menu-user.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-user/auth-menu-user.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-menu-button/auth-menu-user/auth-menu-user.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-register/auth-register.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-register/auth-register.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-register/auth-register.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-register/auth-register.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/auth.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/models/user.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/services/auth.guard.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/services/auth.guard.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/services/auth.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/auth/services/auth.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-item/feed-item.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-item/feed-item.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-item/feed-item.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-item/feed-item.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-list/feed-list.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-list/feed-list.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-list/feed-list.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-list/feed-list.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload-button/feed-upload-button.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload-button/feed-upload-button.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload-button/feed-upload-button.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload-button/feed-upload-button.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed-upload/feed-upload.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/feed.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/models/feed-item.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/services/feed.provider.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/feed/services/feed.provider.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/home/home.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/home/home.page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/home/home.page.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/home/home.page.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/home/home.page.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/menubar/menubar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/menubar/menubar.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/menubar/menubar.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/app/menubar/menubar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/assets/icon/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/assets/shapes.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/environments/environment.prod.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/global.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/karma.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/polyfills.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/theme/variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/src/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End_Server/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End_Server/tslint.json" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/Practice_Server/node_modules/" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Image_Filter_Server/src/server.ts">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RestAPI_Server/src/controllers/v0/feed/routes/feed.router.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="master" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="dSalazar10" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="App-Udagram" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/RestAPI_Server/src/controllers/v0/feed/routes/feed.router.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="App-Udagram" type="b2602c69:ProjectViewProjectNode" />
+              <item name="App-Udagram" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="App-Udagram" type="b2602c69:ProjectViewProjectNode" />
+              <item name="App-Udagram" type="462c0819:PsiDirectoryNode" />
+              <item name="Image_Filter_Server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="App-Udagram" type="b2602c69:ProjectViewProjectNode" />
+              <item name="App-Udagram" type="462c0819:PsiDirectoryNode" />
+              <item name="Image_Filter_Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/RestAPI_Server/node_modules/typescript/lib" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b3e125a2-0c73-4de6-9fdd-718c6b58720c" name="Default Changelist" comment="" />
+      <created>1561956357638</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561956357638</updated>
+      <workItem from="1561956359357" duration="116000" />
+      <workItem from="1561956487061" duration="240000" />
+      <workItem from="1561957081061" duration="62000" />
+      <workItem from="1561957261953" duration="23000" />
+      <workItem from="1561962568034" duration="352000" />
+      <workItem from="1561964317223" duration="195000" />
+      <workItem from="1561964998369" duration="4000" />
+      <workItem from="1561996657469" duration="451000" />
+      <workItem from="1561999915928" duration="363000" />
+      <workItem from="1562006472474" duration="599000" />
+      <workItem from="1562012451290" duration="238000" />
+      <workItem from="1562027759233" duration="633000" />
+      <workItem from="1562028836873" duration="86000" />
+      <workItem from="1562054619982" duration="1850000" />
+      <workItem from="1562088639059" duration="41000" />
+      <workItem from="1562091105140" duration="12000" />
+      <workItem from="1562091168864" duration="10000" />
+      <workItem from="1562139653599" duration="5000" />
+    </task>
+    <task id="LOCAL-00001" summary="An audit revealed 3 vulnerabilities in the packages&#10;Issue resolved using `npm audit fix`">
+      <created>1561956611107</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1561956611108</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Testing new methods to use the Ionic front end server hosted in the cloud.">
+      <created>1561964353329</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1561964353329</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated postman collection and Image Filter Service todo code&#10;in response to the reviewer's comments.">
+      <created>1561996731032</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1561996731032</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed typos, unused imports, and redundancies in the RestAPI Server">
+      <created>1562000017992</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1562000017992</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Connecting RestAPI Server to Image Filter Server">
+      <created>1562006553808</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1562006553808</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add a function to handle image filtering">
+      <created>1562007047909</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1562007047910</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Finished implementing the filter function.">
+      <created>1562012472971</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1562012472971</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fixed sizes of tutorial images">
+      <created>1562054681528</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1562054681528</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="5280000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3299363" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3299363" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3299363" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.3299363" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="An audit revealed 3 vulnerabilities in the packages&#10;Issue resolved using `npm audit fix`" />
+    <MESSAGE value="Testing new methods to use the Ionic front end server hosted in the cloud." />
+    <MESSAGE value="Updated postman collection and Image Filter Service todo code&#10;in response to the reviewer's comments." />
+    <MESSAGE value="Fixed typos, unused imports, and redundancies in the RestAPI Server" />
+    <MESSAGE value="Connecting RestAPI Server to Image Filter Server" />
+    <MESSAGE value="Add a function to handle image filtering" />
+    <MESSAGE value="Finished implementing the filter function." />
+    <MESSAGE value="Fixed sizes of tutorial images" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed sizes of tutorial images" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Front_End_Server/src/app/menubar/menubar.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Front_End_Server/src/app/api/api.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-411">
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Front_End_Server/src/app/auth/auth-login/auth-login.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RestAPI_Server/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Image_Filter_Server/src/server.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RestAPI_Server/src/controllers/v0/feed/routes/feed.router.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
