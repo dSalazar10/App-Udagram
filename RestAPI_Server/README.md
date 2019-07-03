@@ -158,6 +158,8 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 * Click the ‘Download .csv’ button to download your credentials
 ![](./tutorial/L7-16.png)
 * Click ‘Close’
+* For instructions on how to configure the Amazon Web Services Command Line Interface (aws-cli) go 
+[here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 
 ### Setting up the local server
