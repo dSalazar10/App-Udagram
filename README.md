@@ -8,7 +8,7 @@ Tasks completed:
 - PATCH
 - DELETE
 
-2) Deploying a RestAPI with the RestAPI_Server
+2) Deploying a Nodejs/Express RestAPI servere with the RestAPI_Server
 - Add/Remove images from an S3 bucket
 - Authenticate with JWT and store user/pass in AWS RDS
 
@@ -16,7 +16,7 @@ Tasks completed:
 - Login
 - Add image/comment
 
-4) Deploying a Nodejs + Python RestAPI server with the Image_Filter_Server
-- Image processing with Jimp based on queries
+4) Deploying a secong Nodejs/Express RestAPI server with the Image_Filter_Server
+- Image processing with Jimp based on RESTful queries
 
 Click into each of the folders for more information.
