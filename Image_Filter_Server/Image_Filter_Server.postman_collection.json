@@ -65,7 +65,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+					"raw": "{}"
 				},
 				"url": {
 					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
@@ -79,6 +79,46 @@
 						{
 							"key": "image_url",
 							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authorized-bad_url /filteredimage?image_url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/filteredimage?image_url={{bad_site}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{bad_site}}"
 						}
 					]
 				}
@@ -145,7 +185,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+					"raw": "{}"
 				},
 				"url": {
 					"raw": "{{eb_host}}/filteredimage?image_url={{SITE}}",
@@ -159,6 +199,46 @@
 						{
 							"key": "image_url",
 							"value": "{{SITE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authorized-bad_url {cloud}/filteredimage?image_url Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/filteredimage?image_url={{bad_site}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "{{bad_site}}"
 						}
 					]
 				}
@@ -211,21 +291,27 @@
 	],
 	"variable": [
 		{
-			"id": "b01b1e1e-ae6e-4500-9e6b-dd84bbd18af8",
+			"id": "f68de1f0-bef6-42fc-bc50-ba6a79075b7c",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "519f7447-be2d-4bf1-b574-0fa603a6737b",
+			"id": "9d8f5904-9076-4091-9bdd-cd8bfdd96f44",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "ac2fbe30-69c5-49af-96cb-dc40654a7fe9",
+			"id": "14f02ace-31d4-43f0-a88d-ec8b2766cfca",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
+			"type": "string"
+		},
+		{
+			"id": "7ce988f9-4df8-4604-bed5-ef15fdf0307d",
+			"key": "bad_site",
+			"value": "https://www.youtube.com",
 			"type": "string"
 		}
 	]
