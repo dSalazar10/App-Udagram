@@ -1,87 +1,42 @@
 import express, { Request, Response, Router } from "express";
+import { IndexRouter } from './controllers/v0/index.router';
 import bodyParser from 'body-parser';
-import * as EmailValidator from 'email-validator';
-import { filterImageFromURL, deleteLocalFiles } from './util/util';
+
+// If you plan to use sequielize to manage your data
+// You need to add these
+//import { V0MODELS } from './controllers/v0/model.index';
+// import { sequelize } from './sequelize';
 
 (async () => {
 
-  // Init the Express application
-  const app = express();
+  // If you plan to use sequielize to manage your data
+  // You need to add these
+  // await sequelize.addModels(V0MODELS);
+  // await sequelize.sync();
 
-  // Set the network port
+  const app = express();
   const port = process.env.PORT || 8082;
 
-  // Validate URL
-  // Does it contain an image file type?
-  const isImageUrl = require('is-image-url');
-
-  // Verify URL
-  // Does it exist?
-  const urlExists = require('url-exists-deep');
-
-  // Use the body parser middleware for post requests
   app.use(bodyParser.json());
-  
-  // Displays a simple message to the user
-  app.get( "/", async ( req: Request, res:Response ) => {
-    res.send("try GET /filteredimage?image_url={{}}")
-  } );
 
-  // Filter an image based on a public url
-  app.get( "/filteredimage", async ( req: Request, res:Response ) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    // Verify email, verify password, validate email
-    if (!email || !password || !EmailValidator.validate(email) ) {
-      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
-    // VERY BAD - storing a single user/pass in proc env and compare in memory
-    // A quick and easy way to block public access
-    // @TODO: upgrade security
-    if (email !== process.env.ISERVER_USER) {
-      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
-    if (password !== process.env.ISERVER_PASSWORD) {
-      return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
-    // URL of a publicly accessible image
-    const { image_url } = req.query;
-    // Verify query and validate url
-    if ( !image_url || !isImageUrl(image_url) ) {
-      res.status(400).send(`image_url required`);
-    }
-    // Validate url
-    urlExists(image_url).then(function(exists: { href: any; }){
-      if (!exists) {
-        return res.status(400).send(`bad image_url`);
-      } else {
-        // Filter the image
-        filterImageFromURL(image_url).then( (data) => {
-          // Send the resulting file in the response
-          res.sendFile(data, {}, function (err) {
-            if (err) {
-              throw err;
-            } else {
-              // Deletes any files on the server on finish of the response
-              deleteLocalFiles([data]).catch( (err) => {
-                if (err) {
-                  return res.status(400).send(`bad image_url`);
-                }
-              });
-            }
-          });
-        }).catch( (err) => {
-          if (err) {
-            throw err;
-          }
-        })
-      }
-    });
+  //CORS Should be restricted
+  app.use(function(req, res, next) {
+    // This is the port that the Ionic Server uses
+    res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+  });
+
+  app.use('/api/v0/', IndexRouter)
+
+  // Root URI call
+  app.get( "/", async ( req, res ) => {
+    res.send( "/api/v0/" );
   });
 
   // Start the Server
   app.listen( port, () => {
       console.log( `server running http://localhost:${ port }` );
       console.log( `press CTRL+C to stop server` );
-  } );
+  });
 })();

@@ -2,10 +2,8 @@ import { Router, Request, Response } from 'express';
 import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
-import {config} from '../../../../config/config';
 
 const router: Router = Router();
-const axios = require('axios');
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
@@ -19,49 +17,50 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 // Get a specific resource
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id',
+    async (req: Request, res: Response) => {
     const { id } = req.params;
     const item = await FeedItem.findByPk(id);
-    if (!item ) {
-        return res.status(400).send('id not found');
-    }
     res.send(item);
 });
 
-// Update a specific resource
-// This was given as an exercise
-router.patch('/:id', requireAuth, async (req: Request, res: Response) => {
-    // Required id parameter
-    const { id } = req.params;
-    // Verify parameters
-    if ( !id ) {
-        return res.status(400).send(`id is required.`);
-    }
-    // Required JSON body
-    const caption = req.body.caption;
-    const fileName = req.body.url;
-    // Verify caption
-    if (!caption) {
-        return res.status(400).send({ message: 'Caption is required or malformed' });
-    }
-    // Verify fileName
-    if (!fileName) {
-        return res.status(400).send({ message: 'File url is required' });
-    }
-    // Find item based on the search parameter
-    const item: FeedItem = await FeedItem.findByPk(id);
-    // Update the caption and url
-    const updated_item = await item.update({
-        'caption': caption,
-        'url': fileName
-    });
-    updated_item.url = AWS.getGetSignedUrl(updated_item.url);
-    res.status(200).send(updated_item);
+// update a specific resource
+router.patch('/:id',
+    requireAuth,
+    async (req: Request, res: Response) => {
+        // Required id parameter
+        const { id } = req.params;
+        // Verify parameters
+        if ( !id ) {
+            return res.status(400).send(`id is required.`);
+        }
+        // Required JSON body
+        const caption = req.body.caption;
+        const fileName = req.body.url;
+        // Verify caption
+        if (!caption) {
+            return res.status(400).send({ message: 'Caption is required or malformed' });
+        }
+        // Verify fileName
+        if (!fileName) {
+            return res.status(400).send({ message: 'File url is required' });
+        }
+        // Find item based on the search parameter
+        const item: FeedItem = await FeedItem.findByPk(id);
+        // Update the caption and url
+        const updated_item = await item.update({
+            'caption': caption,
+            'url': fileName
+        });
+        updated_item.url = AWS.getGetSignedUrl(updated_item.url);
+        res.status(200).send(updated_item);
 });
 
 
 // Get a signed url to put a new item in the bucket
-router.get('/signed-url/:fileName', requireAuth, async (req: Request, res: Response) => {
+router.get('/signed-url/:fileName',
+    requireAuth,
+    async (req: Request, res: Response) => {
     const { fileName } = req.params;
     const url = AWS.getPutSignedUrl(fileName);
     res.status(201).send({url: url});
@@ -70,7 +69,9 @@ router.get('/signed-url/:fileName', requireAuth, async (req: Request, res: Respo
 // Post meta data and the filename after a file is uploaded
 // NOTE the file name is they key name in the s3 bucket.
 // body : {caption: string, fileName: string};
-router.post('/', requireAuth, async (req: Request, res: Response) => {
+router.post('/',
+    requireAuth,
+    async (req: Request, res: Response) => {
     const caption = req.body.caption;
     const fileName = req.body.url;
 
@@ -88,7 +89,9 @@ router.post('/', requireAuth, async (req: Request, res: Response) => {
             caption: caption,
             url: fileName
     });
+
     const saved_item = await item.save();
+
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
     res.status(201).send(saved_item);
 });
