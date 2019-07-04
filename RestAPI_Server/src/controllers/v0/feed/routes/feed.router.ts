@@ -7,6 +7,7 @@ const router: Router = Router();
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
+    /*
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
     items.rows.map((item) => {
             if (item.url) {
@@ -14,13 +15,18 @@ router.get('/', async (req: Request, res: Response) => {
             }
     });
     res.send(items);
+     */
 });
 
 // Get a specific resource
 router.get('/:id',
     async (req: Request, res: Response) => {
     const { id } = req.params;
-    const item = await FeedItem.findByPk(id);
+    const item = await FeedItem.findByPk(id).catch( (err) => {
+        if (err) {
+            throw err;
+        }
+        });
     res.send(item);
 });
 
