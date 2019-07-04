@@ -20,7 +20,11 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id',
     async (req: Request, res: Response) => {
     const { id } = req.params;
-    const item = await FeedItem.findByPk(id);
+    const item = await FeedItem.findByPk(id).catch( (err) => {
+        if (err) {
+            throw err;
+        }
+        });
     res.send(item);
 });
 

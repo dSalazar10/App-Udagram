@@ -76,6 +76,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   ![](./tutorial/L4-4i.png)
   
 ### Setting up Postbird
+
 * Open Postbird
 ![](./tutorial/L5-1.png)
 * Copy and paste the endpoint, username, password, and database name
@@ -113,6 +114,52 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   ![](./tutorial/L6-5c.png)
   - Click Save
 
+### Setting up an AWS User Account
+
+* Navigate to the AWS home page and search services for IAM
+![](./tutorial/L7-1.png)
+* Click the ‘Users’ button in the navigation bar on the left
+* Click the ‘Add user’ button
+* Type in a new user name
+* Click the ‘Programmatic access’ radio button
+![](./tutorial/L7-5.png)
+* Click next
+* Click the ‘Create group’ button
+![](./tutorial/L7-7.png)
+* Click the ‘Create policy’ button
+![](./tutorial/L7-8.png)
+  - Click the ‘Choose a Service’ button 
+  ![](./tutorial/L7-8a.png)
+  - Type in “S3” and click the S3 button
+  - Click the ‘All S3 actions (s3:*)’ radio button
+  ![](./tutorial/L7-8c.png)
+  - Click the ‘Response’ tab
+  - Click the ‘bucket’ tab’s ‘Add ARN’ button
+  ![](./tutorial/L7-8e.png)
+  - Enter your S3 bucket name in the text box and click ‘Add’
+  ![](./tutorial/L7-8f.png)
+  - Click the ‘object’ tab’s ‘Add ARN’ button
+  - Enter your S3 bucket name for the ‘bucket name’ field
+  - Click the ‘Any’ radio button for the ‘object name’ field
+  ![](./tutorial/L7-8i.png)
+  - Click ‘Add’ 
+  - Click ‘Review Policy’
+  - Add a name for your policy
+  ![](./tutorial/L7-8l.png)
+  - Click ‘Create Policy’
+* Now go back to the tab you started in and enter the policy name you just created
+![](./tutorial/L7-9.png)
+* Enter a name for your group
+* Click the refresh button and search for the policy you just created
+* Click the radio button next to your policy and click ‘Create Group’
+* Click ‘Next’
+* Click ‘Next’
+* Click ‘Create User’
+* Click the ‘Download .csv’ button to download your credentials
+![](./tutorial/L7-16.png)
+* Click ‘Close’
+* For instructions on how to configure the Amazon Web Services Command Line Interface (aws-cli) go 
+[here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 
 ### Setting up the local server
