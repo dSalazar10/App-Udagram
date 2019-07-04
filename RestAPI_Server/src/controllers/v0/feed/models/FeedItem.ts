@@ -1,4 +1,5 @@
-import { Table, Column, Model, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import {Table, Column, Model, HasMany, PrimaryKey, CreatedAt, UpdatedAt, ForeignKey} from 'sequelize-typescript';
+import { User } from '../../users/models/User';
 
 @Table
 export class FeedItem extends Model<FeedItem> {
