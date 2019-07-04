@@ -28,12 +28,15 @@
 					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
 				},
 				"url": {
-					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
+					"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"filteredimage"
+						"api",
+						"v0",
+						"filter",
+						"demo"
 					],
 					"query": [
 						{
@@ -68,12 +71,15 @@
 					"raw": "{}"
 				},
 				"url": {
-					"raw": "{{host}}/filteredimage?image_url={{SITE}}",
+					"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"filteredimage"
+						"api",
+						"v0",
+						"filter",
+						"demo"
 					],
 					"query": [
 						{
@@ -108,12 +114,15 @@
 					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
 				},
 				"url": {
-					"raw": "{{host}}/filteredimage?image_url={{bad_site}}",
+					"raw": "{{host}}/api/v0/filter/demo?image_url={{bad_site}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"filteredimage"
+						"api",
+						"v0",
+						"filter",
+						"demo"
 					],
 					"query": [
 						{
@@ -148,12 +157,15 @@
 					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
 				},
 				"url": {
-					"raw": "{{eb_host}}/filteredimage?image_url={{SITE}}",
+					"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
 					"host": [
 						"{{eb_host}}"
 					],
 					"path": [
-						"filteredimage"
+						"api",
+						"v0",
+						"filter",
+						"demo"
 					],
 					"query": [
 						{
@@ -228,12 +240,15 @@
 					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
 				},
 				"url": {
-					"raw": "{{host}}/filteredimage?image_url={{bad_site}}",
+					"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{bad_site}}",
 					"host": [
-						"{{host}}"
+						"{{eb_host}}"
 					],
 					"path": [
-						"filteredimage"
+						"api",
+						"v0",
+						"filter",
+						"demo"
 					],
 					"query": [
 						{
@@ -241,17 +256,6 @@
 							"value": "{{bad_site}}"
 						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "root",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
 				}
 			},
 			"response": []
@@ -291,25 +295,25 @@
 	],
 	"variable": [
 		{
-			"id": "f68de1f0-bef6-42fc-bc50-ba6a79075b7c",
+			"id": "2ae7631c-038f-4d80-8829-ddb48e46c533",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "9d8f5904-9076-4091-9bdd-cd8bfdd96f44",
+			"id": "f29e0704-2435-423d-8aaf-30f38c897ce3",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "14f02ace-31d4-43f0-a88d-ec8b2766cfca",
+			"id": "a472c4a1-6456-4a78-b2d1-a07e8ea5b7e3",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "7ce988f9-4df8-4604-bed5-ef15fdf0307d",
+			"id": "8ac4448f-4a8f-468e-b30c-d5aca14d93d4",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
 			"type": "string"
