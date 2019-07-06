@@ -8,7 +8,10 @@ export const config = {
     'aws_reigion': 'us-east-2',
     'aws_profile': process.env.AWS_PROFILE,
     'aws_media_bucket': process.env.AWS_MEDIA_BUCKET,
-    'jwt_secret': process.env.JWT_SECRET
+    'jwt_secret': process.env.JWT_SECRET,
+    'filter_host': process.env.FILTER_HOST,
+    'filter_username': process.env.FILTER_USERNAME,
+    'filter_password': process.env.FILTER_PASSWORD
   },
   'prod': {
     'username': '',

@@ -47,7 +47,6 @@ async function deleteLocalFiles(files: Array<string>) {
 
 // Filter an image based on a public url
 router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
-
     // URL of a publicly accessible image
     const { image_url } = req.query;
     // Verify query and validate url

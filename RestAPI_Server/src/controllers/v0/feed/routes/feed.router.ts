@@ -2,68 +2,56 @@ import { Router, Request, Response } from 'express';
 import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
+import {config} from '../../../../config/config';
 
 const router: Router = Router();
 const axios = require('axios');
-const host = 'http://localhost:8082/api/v0';
-
-// @TODO: connect to Image Filter Server
-async function filterImage(image_url: string, token: string) {
-    const host = 'http://localhost:8082/api/v0/filter/demo?image_url=';
-    const sessionUrl = `${host}${image_url}`;
-    const uname = 'hello@world.com';
-    const pass = 'fancypass';
-    axios.get(sessionUrl, {}, {
-        auth: {
-            token: token,
-            user: {
-                email: 'hello@world.com'
-            }
-        }
-    }).then(function(response) {
-        console.log('Authenticated');
-    }).catch(function(error) {
-        console.log({msg: 'Error on Authentication', err: error});
-    });
-}
-function test() {
-    const config = {
-        headers: {
-            'content-type': 'application/json',
-        }
-    };
-    const url = 'http://localhost:8082/api/v0/filter/demo?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg';
-    axios.get(url, config)
-        .then((response: any) => {
-            // res.status(200).send(response);
-        }).catch((error: any) => {
-        console.log(error);
-    });
-}
-
-async function logIn() {
-
-}
 
 router.get('/demo',
     async (req: Request, res: Response) => {
 
-    // Log into Image Filter Server
-    const config = {
+    // Set the headers for the Login Request
+    const postConfig = {
         headers: {
             'content-type': 'application/json',
         }
     };
+    // Set the payload to be the Login Credentials
     const data = {
-        email: 'hello@world.com',
-        password: 'fancypass'
+        email: config.dev.filter_username,
+        password: config.dev.filter_password
     }
+    const url = config.dev.filter_host;
+    const testImage = 'https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg';
+    // Log In to the Image Filter Server
     let token;
-    await axios.post(`${host}/users/auth/login`, data, config)
-        .then( (response: { data: { token: any; }; }) => {
-            token = response.data.token;
-            res.status(200).send(token);
+    await axios.post(`${url}/users/auth/login`, data, postConfig)
+        .then( (postResponse: { data: { token: any; }; }) => {
+            // Extract the token from the response
+            token = postResponse.data.token;
+
+            // res.status(200).send({auth: true, token: token} );
         }).catch(function (err: any) {
+            console.log(err);
+            res.status(400).send(`failed to get token`);
+        });
+
+    // Set the headers for the Filter Request
+    const getConfig = {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    };
+    // Request for an image to be filtered
+    await axios.get(`${url}/filter/demo?image_url=${testImage}`, getConfig)
+        .then( (getResponse: { data: any; }) => {
+            // Respond with the filtered image
+            res.status(200).send(
+                // Here is the filtered image ready to be stored in S3!
+                new Buffer(getResponse.data).toString('base64')
+            );
+        })
+        .catch(function (err: any) {
             console.log(err);
         });
 });
