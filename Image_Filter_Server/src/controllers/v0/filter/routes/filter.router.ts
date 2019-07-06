@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
 import fs from 'fs';
+import { existsSync } from 'fs';
 import Jimp = require('jimp');
+import { spawn } from 'child_process';
 import {requireAuth} from '../../users/routes/auth.router';
-
 const router: Router = Router();
 
 // Validate URL
@@ -12,6 +13,7 @@ const isImageUrl = require('is-image-url');
 // Verify URL
 // Does it exist?
 const urlExists = require('url-exists-deep');
+
 
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
@@ -61,12 +63,12 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
             // Filter the image
             filterImageFromURL(image_url).then( (data) => {
                 // Send the resulting file in the response
-                res.sendFile(data, {}, function (err) {
+                res.sendFile(data, {}, function (err: any) {
                     if (err) {
                         throw err;
                     } else {
                         // Deletes any files on the server on finish of the response
-                        deleteLocalFiles([data]).catch( (derr) => {
+                        deleteLocalFiles([data]).catch( (derr: any) => {
                             if (derr) {
                                 return res.status(400).send(`bad image_url`);
                             }
@@ -76,6 +78,47 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
             }).catch( (err) => {
                 if (err) {
                     throw err;
+                }
+            });
+        }
+    });
+});
+
+async function saveImage(inputURL: string) {
+    const outPath = '/tmp/input/';
+    const fileName = Math.floor(Math.random() * 2000) + '.jpg';
+    const photo = await Jimp.read(inputURL);
+    await photo.write(__dirname + outPath + fileName);
+    return [__dirname + outPath, fileName];
+}
+
+router.get( '/canny', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    // Validate url
+    urlExists(image_url).then(function(exists: { href: any; }) {
+        if (!exists) {
+            return res.status(400).send(`bad image_url`);
+        } else {
+            const filter_path = 'src/controllers/v0/filter/filters';
+            const outputDir = '/tmp/output';
+            saveImage(image_url).then( ([path, fileName]) => {
+                while (!existsSync(path + fileName)) {
+                    console.log('.');
+                }
+                const pythonProcess = spawn('python3', [
+                    `${filter_path}/image_filter.py`,   // function's location
+                    path, fileName                      // function's arguments
+                ]);
+                if (pythonProcess !== undefined) {
+                    pythonProcess.stdout.on('data', (data) => {
+                        // Do something with the data returned from python script
+                        console.log(data.toString());
+                    });
                 }
             });
         }
