@@ -112,7 +112,7 @@ router.get( '/canny', requireAuth, async ( req: Request, res: Response ) => {
                 }
                 const pythonProcess = spawn('python3', [
                     `${filter_path}/image_filter.py`,   // function's location
-                    fileName, path                      // function's arguments
+                    path, fileName                      // function's arguments
                 ]);
                 if (pythonProcess !== undefined) {
                     pythonProcess.stdout.on('data', (data) => {

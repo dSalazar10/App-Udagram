@@ -5,8 +5,8 @@ failed = False
 
 def process():
     # Get the argument variables
-    file_name = sys.argv[1]
-    dir_path = sys.argv[2]
+    dir_path = sys.argv[1]
+    file_name = sys.argv[2]
 
     # Load the image from disk
     img = cv2.imread(dir_path + file_name, 0)
