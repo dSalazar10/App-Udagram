@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import Jimp = require('jimp');
+import { spawn } from 'child_process';
 import {requireAuth} from '../../users/routes/auth.router';
 
 const router: Router = Router();
@@ -81,5 +82,15 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
         }
     });
 });
+
+function test() {
+    const pythonProcess = spawn('python3', ['src/image_filter.py']);
+    if (pythonProcess !== undefined) {
+        pythonProcess.stdout.on('data', (data) => {
+            // Do something with the data returned from python script
+            console.log(data.toString());
+        });
+    }
+}
 
 export const FilterRouter: Router = router;
