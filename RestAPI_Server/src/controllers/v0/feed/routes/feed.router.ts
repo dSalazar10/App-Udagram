@@ -4,6 +4,43 @@ import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 
 const router: Router = Router();
+const axios = require('axios');
+
+// @TODO: connect to Image Filter Server
+async function filterImage(image_url: string, token: string) {
+    const host = 'http://localhost:8082/api/v0/filter/demo?image_url=';
+    const sessionUrl = `${host}${image_url}`;
+    const uname = 'hello@world.com';
+    const pass = 'fancypass';
+    axios.get(sessionUrl, {}, {
+        auth: {
+            token: token,
+            user: {
+                email: 'hello@world.com'
+            }
+        }
+    }).then(function(response) {
+        console.log('Authenticated');
+    }).catch(function(error) {
+        console.log({msg: 'Error on Authentication', err: error});
+    });
+}
+router.get('/demo',
+    requireAuth,
+    async (req: Request, res: Response) => {
+    const config = {
+        headers: {
+            authorization: req.headers.authorization,
+        }
+    }
+    const url = 'http://localhost:8082/api/v0/filter/demo?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg';
+    axios.get(url, config)
+        .then((response: any) => {
+            res.status(200).send(response);
+        }).catch((error: any) => {
+            console.log(error);
+        });
+});
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {

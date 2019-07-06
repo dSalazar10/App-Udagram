@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import * as EmailValidator from "email-validator";
 import fs from 'fs';
 import Jimp = require('jimp');
+import {requireAuth} from '../../users/routes/auth.router';
 
 const router: Router = Router();
 
@@ -28,8 +28,8 @@ async function filterImageFromURL(inputURL: string): Promise<string> {
             .resize(256, 256) // resize
             .quality(60) // set JPEG quality
             .greyscale() // set greyscale
-            .write(__dirname+outPath, (img)=>{
-                resolve(__dirname+outPath);
+            .write(__dirname + outPath, (img) => {
+                resolve(__dirname + outPath);
             });
     });
 }
@@ -40,29 +40,14 @@ async function filterImageFromURL(inputURL: string): Promise<string> {
 // INPUTS
 //    files: Array<string> an array of absolute paths to files
 async function deleteLocalFiles(files: Array<string>) {
-    for( let file of files) {
+    for ( const file of files) {
         fs.unlinkSync(file);
     }
 }
 
-
 // Filter an image based on a public url
-router.get( "/demo", async ( req: Request, res:Response ) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    // Verify email, verify password, validate email
-    if (!email || !password || !EmailValidator.validate(email) ) {
-        return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
-    // VERY BAD - storing a single user/pass in proc env and compare in memory
-    // A quick and easy way to block public access
-    // @TODO: upgrade security
-    if (email !== process.env.ISERVER_USER) {
-        return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
-    if (password !== process.env.ISERVER_PASSWORD) {
-        return res.status(400).send({ auth: false, message: `Failed to authenticate.` });
-    }
+router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
+
     // URL of a publicly accessible image
     const { image_url } = req.query;
     // Verify query and validate url
@@ -70,7 +55,7 @@ router.get( "/demo", async ( req: Request, res:Response ) => {
         res.status(400).send(`image_url required`);
     }
     // Validate url
-    urlExists(image_url).then(function(exists: { href: any; }){
+    urlExists(image_url).then(function(exists: { href: any; }) {
         if (!exists) {
             return res.status(400).send(`bad image_url`);
         } else {
@@ -82,8 +67,8 @@ router.get( "/demo", async ( req: Request, res:Response ) => {
                         throw err;
                     } else {
                         // Deletes any files on the server on finish of the response
-                        deleteLocalFiles([data]).catch( (err) => {
-                            if (err) {
+                        deleteLocalFiles([data]).catch( (derr) => {
+                            if (derr) {
                                 return res.status(400).send(`bad image_url`);
                             }
                         });
@@ -93,7 +78,7 @@ router.get( "/demo", async ( req: Request, res:Response ) => {
                 if (err) {
                     throw err;
                 }
-            })
+            });
         }
     });
 });

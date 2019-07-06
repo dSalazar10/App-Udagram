@@ -1,4 +1,3 @@
-/* If you plan on using sequilize to manage your data, you will need to configure this file */
+import { User } from './users/models/User';
 
-//import { SomeThing } from './some/where/SomeThing';
-//export const V0MODELS = [ /* SomeThing */ ];
+export const V0MODELS = [ User ];
