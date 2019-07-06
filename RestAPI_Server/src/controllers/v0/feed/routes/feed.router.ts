@@ -7,6 +7,8 @@ import {config} from '../../../../config/config';
 const router: Router = Router();
 const axios = require('axios');
 
+
+// This is a demo showing a pass-through to the Image Filter Server
 router.get('/demo',
     async (req: Request, res: Response) => {
 
