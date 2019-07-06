@@ -5,6 +5,7 @@ import * as AWS from '../../../../aws';
 
 const router: Router = Router();
 const axios = require('axios');
+const host = 'http://localhost:8082/api/v0';
 
 // @TODO: connect to Image Filter Server
 async function filterImage(image_url: string, token: string) {
@@ -25,20 +26,45 @@ async function filterImage(image_url: string, token: string) {
         console.log({msg: 'Error on Authentication', err: error});
     });
 }
-router.get('/demo',
-    requireAuth,
-    async (req: Request, res: Response) => {
+function test() {
     const config = {
         headers: {
-            authorization: req.headers.authorization,
+            'content-type': 'application/json',
         }
-    }
+    };
     const url = 'http://localhost:8082/api/v0/filter/demo?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg';
     axios.get(url, config)
         .then((response: any) => {
-            res.status(200).send(response);
+            // res.status(200).send(response);
         }).catch((error: any) => {
-            console.log(error);
+        console.log(error);
+    });
+}
+
+async function logIn() {
+
+}
+
+router.get('/demo',
+    async (req: Request, res: Response) => {
+
+    // Log into Image Filter Server
+    const config = {
+        headers: {
+            'content-type': 'application/json',
+        }
+    };
+    const data = {
+        email: 'hello@world.com',
+        password: 'fancypass'
+    }
+    let token;
+    await axios.post(`${host}/users/auth/login`, data, config)
+        .then( (response: { data: { token: any; }; }) => {
+            token = response.data.token;
+            res.status(200).send(token);
+        }).catch(function (err: any) {
+            console.log(err);
         });
 });
 
