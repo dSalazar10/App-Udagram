@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { FeedItem } from '../feed/models/feed-item.model';
 import { catchError, tap, map } from 'rxjs/operators';
 
+// If you plan to move this to the cloud
+// change the environment variable to environment.webHost
 const API_HOST = environment.apiHost;
 
 @Injectable({

@@ -6,259 +6,439 @@
 	},
 	"item": [
 		{
-			"name": "authorized-valid /filteredimage?image_url",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-				},
-				"url": {
-					"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"v0",
-						"filter",
-						"demo"
-					],
-					"query": [
+			"name": "Local Host",
+			"item": [
+				{
+					"name": "valid /api/v0/user/auth/login",
+					"event": [
 						{
-							"key": "image_url",
-							"value": "{{SITE}}"
+							"listen": "test",
+							"script": {
+								"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"body includes an email and token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.auth).to.eql(true);",
+									"    pm.expect(jsonData.user).to.not.eql(null);",
+									"    pm.expect(jsonData.token).to.not.eql(null)",
+									"    ",
+									"    pm.environment.set(\"token\", jsonData.token);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/users/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authorized-valid /filteredimage?image_url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{SITE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unauthorized /filteredimage?image_url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34adc7f3-17d8-499d-9f0b-319aa89e1a68",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{SITE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authorized-bad_url /filteredimage?image_url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "960d14bc-45ab-4000-b252-75a4e501ea59",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/filter/demo?image_url={{bad_site}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{bad_site}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "unauthorized /filteredimage?image_url",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{}"
-				},
-				"url": {
-					"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"v0",
-						"filter",
-						"demo"
-					],
-					"query": [
+			"name": "Cloud Host",
+			"item": [
+				{
+					"name": "valid /api/v0/user/auth/login",
+					"event": [
 						{
-							"key": "image_url",
-							"value": "{{SITE}}"
+							"listen": "test",
+							"script": {
+								"id": "9e00feb3-c3d2-45ca-b129-90631c015a5e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"body includes an email and token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.auth).to.eql(true);",
+									"    pm.expect(jsonData.user).to.not.eql(null);",
+									"    pm.expect(jsonData.token).to.not.eql(null)",
+									"    ",
+									"    pm.environment.set(\"token\", jsonData.token);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "authorized-bad_url /filteredimage?image_url",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-				},
-				"url": {
-					"raw": "{{host}}/api/v0/filter/demo?image_url={{bad_site}}",
-					"host": [
-						"{{host}}"
 					],
-					"path": [
-						"api",
-						"v0",
-						"filter",
-						"demo"
-					],
-					"query": [
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{eb_host}}/api/v0/users/auth/login",
+							"host": [
+								"{{eb_host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authorized /filteredimage?image_url",
+					"event": [
 						{
-							"key": "image_url",
-							"value": "{{bad_site}}"
+							"listen": "test",
+							"script": {
+								"id": "ab7d4826-3bdd-441d-b063-64233f0dc7a6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "authorized {cloud}/filteredimage?image_url",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-				},
-				"url": {
-					"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
-					"host": [
-						"{{eb_host}}"
 					],
-					"path": [
-						"api",
-						"v0",
-						"filter",
-						"demo"
-					],
-					"query": [
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
+							"host": [
+								"{{eb_host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{SITE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unauthorized /filteredimage?image_url",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
+							"host": [
+								"{{eb_host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{SITE}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authorized-bad_url /filteredimage?image_url Copy",
+					"event": [
 						{
-							"key": "image_url",
-							"value": "{{SITE}}"
+							"listen": "test",
+							"script": {
+								"id": "a058b8d4-599c-4459-af49-2d7e672e85a6",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "unauthorized {cloud}/filteredimage?image_url",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{}"
-				},
-				"url": {
-					"raw": "{{eb_host}}/filteredimage?image_url={{SITE}}",
-					"host": [
-						"{{eb_host}}"
 					],
-					"path": [
-						"filteredimage"
-					],
-					"query": [
-						{
-							"key": "image_url",
-							"value": "{{SITE}}"
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+						},
+						"url": {
+							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{bad_site}}",
+							"host": [
+								"{{eb_host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"filter",
+								"demo"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "{{bad_site}}"
+								}
+							]
 						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "authorized-bad_url {cloud}/filteredimage?image_url Copy",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-				},
-				"url": {
-					"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{bad_site}}",
-					"host": [
-						"{{eb_host}}"
-					],
-					"path": [
-						"api",
-						"v0",
-						"filter",
-						"demo"
-					],
-					"query": [
-						{
-							"key": "image_url",
-							"value": "{{bad_site}}"
-						}
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	],
 	"auth": {
@@ -266,7 +446,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjA4MTY4NH0.kr_bfqD6X3y3ZhSNERYdMvVILQd4mxgpIFAb5iuz5js",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjM5MjQ5M30.znSbe8qMD20OcJsqQ0eY1NuvjTm18i1LDhRUVAgWXI8",
 				"type": "string"
 			}
 		]
@@ -295,25 +475,25 @@
 	],
 	"variable": [
 		{
-			"id": "2ae7631c-038f-4d80-8829-ddb48e46c533",
+			"id": "091a17a9-8ccf-406d-ab18-4a44491b88ad",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "f29e0704-2435-423d-8aaf-30f38c897ce3",
+			"id": "d21ee7af-376b-4642-8a5a-0b68c4572f2c",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "a472c4a1-6456-4a78-b2d1-a07e8ea5b7e3",
+			"id": "5c190e1a-bc88-4c06-941c-47cebb028a91",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "8ac4448f-4a8f-468e-b30c-d5aca14d93d4",
+			"id": "34ccada0-b7c4-4001-8207-dcf5133b7a0a",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
 			"type": "string"
