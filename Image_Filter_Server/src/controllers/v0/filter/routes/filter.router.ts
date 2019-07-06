@@ -4,6 +4,7 @@ import { existsSync } from 'fs';
 import Jimp = require('jimp');
 import { spawn } from 'child_process';
 import {requireAuth} from '../../users/routes/auth.router';
+import {canny} from 'opencv4nodejs';
 const cv = require('opencv4nodejs');
 
 const router: Router = Router();
@@ -96,73 +97,70 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
 //    inputURL: string - a publicly accessible url to an image file
 // RETURNS
 //    an absolute path to a filtered image locally saved file and the file's name
-async function saveImage(inputURL: string) {
-    const outPath = '/tmp/input/';
-    const fileName = Math.floor(Math.random() * 2000) + '.jpg';
-    const photo = await Jimp.read(inputURL);
-    await photo.write(__dirname + outPath + fileName);
-    return [__dirname + outPath, fileName];
+async function saveImage(inputURL: string): Promise<string>  {
+    const input = __dirname + '/tmp/';
+    return new Promise( async resolve => {
+        const photo = await Jimp.read(inputURL);
+        const fileName = Math.floor(Math.random() * 2000) + '.jpg';
+        await photo.write(input + fileName, (img) => {
+                resolve(fileName);
+            });
+    });
 }
 
-// router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
-//     // Type of filter, URL of a publicly accessible image
-//     const { type, image_url } = req.query;
-//     // Verify type query
-//     if ( !type ) {
-//         res.status(400).send(`type required`);
-//     }
-//     // Verify image_url query and validate url
-//     if ( !image_url || !isImageUrl(image_url) ) {
-//         res.status(400).send(`image_url required`);
-//     }
-//
-//     // Validate url
-//     urlExists(image_url).then(function(exists: { href: any; }) {
-//         if (!exists) {
-//             return res.status(400).send(`bad image_url`);
-//         } else { // URL points to a publicly accessible image
-//             // Download the image to local storage
-//             saveImage(image_url).then( ([path, fileName]) => {
-//                 // Path to the downloaded image
-//                 const original = path + fileName;
-//                 // BAD - Wait for the file to finish downloading
-//                 while (!existsSync(original)) { /* blocking polling loop */}
-//                 // TODO: Try adding a second OpenCV filter script
-//                 //       and add an additional parameter to select
-//                 //       which filter to use as a POST parameter
-//                 // Fork a new process - canny filter
-//                 const pythonProcess = spawn('python3', [
-//                     // function's path
-//                     `${filter_path}/canny.py`,
-//                     // function's arguments
-//                     path, fileName
-//                 ], {}).on('error', function( err ) {
-//                     throw err;
-//                 });
-//                 if (pythonProcess !== undefined) {
-//                     pythonProcess.stdout.on('data', () => {
-//                         const filtered = path + 'filtered.' + fileName;
-//                         // BAD - Wait for the file to finish being filtered
-//                         while (!existsSync(filtered)) { /* blocking polling loop */}
-//                         // Send the resulting file in the response
-//                         res.sendFile(filtered, {}, function (err: any) {
-//                             if (err) {
-//                                 console.log(err);
-//                             } else {
-//                                 // Deletes any files on the server on finish of the response
-//                                 deleteLocalFiles([path + fileName, filtered])
-//                                     .catch((derr: any) => {
-//                                     if (derr) {
-//                                         return res.status(400).send(`bad image_url`);
-//                                     }
-//                                 });
-//                             }
-//                         });
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// });
+async function cannyFilter(original: string): Promise<string>  {
+    const output = __dirname + '/tmp/';
+    return new Promise( async resolve => {
+        const mat = cv.imread(output + 'filtered.' + original);
+        mat.canny(50, 50, 3);
+        cv.imwrite(output + 'filtered.' + original, mat);
+        resolve(output + 'filtered.' + original);
+    });
+}
+
+router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
+    // Type of filter, URL of a publicly accessible image
+    const { type, image_url } = req.query;
+    // Verify type query
+    if ( !type ) {
+        res.status(400).send(`type required`);
+    }
+    // Verify image_url query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+
+    // Validate url
+    urlExists(image_url).then(function(exists: { href: any; }) {
+        if (!exists) {
+            return res.status(400).send(`bad image_url`);
+        } else { // URL points to a publicly accessible image
+            saveImage(image_url).then( (original_data) => {
+                while (!existsSync(__dirname + original_data)) { console.log(`,`); }
+                console.log(original_data);
+
+                // cannyFilter(original_data).then( (filtered_data) => {
+                //     while (!existsSync(filtered_data)) { /* blocking polling loop */}
+                //     console.log(filtered_data);
+                //
+                //     res.sendFile(filtered_data, {}, function (err: any) {
+                //     if (err) {
+                //         throw err;
+                //     } else {
+                //         // Deletes any files on the server on finish of the response
+                //         deleteLocalFiles([original_data, filtered_data]).catch( (derr: any) => {
+                //             if (derr) {
+                //                 return res.status(400).send(`bad image_url`);
+                //             }
+                //         });
+                //     }
+                //     });
+                // });
+            });
+        }
+    });
+});
+
+
 
 export const FilterRouter: Router = router;
