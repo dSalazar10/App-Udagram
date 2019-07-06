@@ -1,18 +1,15 @@
 import sys
 import cv2
-import os
 
-inputDir = '/mock/'
-outputDir = '/out/'
-fileName = 'xander2.jpg'
 failed = False
 
-def process(fileName, inputDir, outputDir):
-    # We need an absolute path
-    dir_path = os.path.dirname(os.path.realpath(__file__))
+def process():
+    # Get the argument variables
+    file_name = sys.argv[1]
+    dir_path = sys.argv[2]
 
     # Load the image from disk
-    img = cv2.imread(dir_path + inputDir + fileName, 0)
+    img = cv2.imread(dir_path + file_name, 0)
     if img is None:
         return False, "Image Failed to Load"
 
@@ -22,14 +19,14 @@ def process(fileName, inputDir, outputDir):
         return False, "Image Failed To Filter"
 
     # Write the image back to disk
-    out = cv2.imwrite(dir_path + outputDir + fileName, filtered)
+    out = cv2.imwrite(dir_path + 'filtered.' + file_name, filtered)
     if not out:
         return False, "Image Failed To Write"
 
     return True, "Success"
 
 
-isSuccess, message = process(fileName, inputDir, outputDir)
+isSuccess, message = process()
 print(isSuccess)
 print(message)
 sys.stdout.flush()
