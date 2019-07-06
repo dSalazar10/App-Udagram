@@ -3,6 +3,7 @@ import cv2
 
 failed = False
 
+
 def process():
     # Get the argument variables
     dir_path = sys.argv[1]
