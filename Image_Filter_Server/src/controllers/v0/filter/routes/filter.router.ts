@@ -1,10 +1,8 @@
 import { Router, Request, Response } from 'express';
-import fs from 'fs';
-import { existsSync } from 'fs';
+import fs, {existsSync} from 'fs';
 import Jimp = require('jimp');
-import { spawn } from 'child_process';
+const download = require('image-downloader')
 import {requireAuth} from '../../users/routes/auth.router';
-import {canny} from 'opencv4nodejs';
 const cv = require('opencv4nodejs');
 
 const router: Router = Router();
@@ -97,66 +95,69 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
 //    inputURL: string - a publicly accessible url to an image file
 // RETURNS
 //    an absolute path to a filtered image locally saved file and the file's name
-async function saveImage(inputURL: string): Promise<string>  {
+async function saveImage(inputURL: string): Promise<string> {
     const input = __dirname + '/tmp/';
     return new Promise( async resolve => {
         const photo = await Jimp.read(inputURL);
         const fileName = Math.floor(Math.random() * 2000) + '.jpg';
-        await photo.write(input + fileName, (img) => {
-                resolve(fileName);
-            });
+        await photo.write(input + fileName);
     });
 }
 
-async function cannyFilter(original: string): Promise<string>  {
+async function cannyFilter(original: string) {
     const output = __dirname + '/tmp/';
-    return new Promise( async resolve => {
+    if (fs.existsSync(output + original)) {
         const mat = cv.imread(output + 'filtered.' + original);
         mat.canny(50, 50, 3);
         cv.imwrite(output + 'filtered.' + original, mat);
-        resolve(output + 'filtered.' + original);
-    });
+        return output + 'filtered.' + original;
+    }
+    return '';
 }
 
 router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
     // Type of filter, URL of a publicly accessible image
-    const { type, image_url } = req.query;
+    const {type, image_url} = req.query;
     // Verify type query
-    if ( !type ) {
+    if (!type) {
         res.status(400).send(`type required`);
     }
     // Verify image_url query and validate url
-    if ( !image_url || !isImageUrl(image_url) ) {
+    if (!image_url || !isImageUrl(image_url)) {
         res.status(400).send(`image_url required`);
     }
 
     // Validate url
-    urlExists(image_url).then(function(exists: { href: any; }) {
+    urlExists(image_url).then(function (exists: { href: any; }) {
         if (!exists) {
             return res.status(400).send(`bad image_url`);
-        } else { // URL points to a publicly accessible image
-            saveImage(image_url).then( (original_data) => {
-                while (!existsSync(__dirname + original_data)) { console.log(`,`); }
-                console.log(original_data);
+        } else {
+            const path = __dirname + '/tmp/';
+            const fileName = Math.floor(Math.random() * 2000) + '.jpg';
+            download.image({url: image_url, dest: path + fileName})
+                .then((response: { filename: any, image: any }) => {
+                    while (!existsSync(response.filename)) { /* blocking polling loop */}
+                    const mat = cv.imread(path + fileName);
+                    mat.canny(50, 50, 3);
+                    cv.imwrite(path + 'filtered.' + fileName, mat);
 
-                // cannyFilter(original_data).then( (filtered_data) => {
-                //     while (!existsSync(filtered_data)) { /* blocking polling loop */}
-                //     console.log(filtered_data);
-                //
-                //     res.sendFile(filtered_data, {}, function (err: any) {
-                //     if (err) {
-                //         throw err;
-                //     } else {
-                //         // Deletes any files on the server on finish of the response
-                //         deleteLocalFiles([original_data, filtered_data]).catch( (derr: any) => {
-                //             if (derr) {
-                //                 return res.status(400).send(`bad image_url`);
-                //             }
-                //         });
-                //     }
-                //     });
-                // });
-            });
+                    res.sendFile(path + 'filtered.' + fileName, {}, function (err: any) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            // Deletes any files on the server on finish of the response
+                            deleteLocalFiles([response.filename, path + 'filtered.' + fileName])
+                                .catch( (derr: any) => {
+                                    if (derr) {
+                                        return res.status(400).send(`bad image_url`);
+                                    }
+                                });
+                        }
+                    });
+                })
+                .catch((err: any) => {
+                    console.error(err);
+                });
         }
     });
 });
