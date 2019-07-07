@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import fs, {existsSync} from 'fs';
+import fs from 'fs';
 import Jimp = require('jimp');
 import { requireAuth } from '../../users/routes/auth.router';
 const router: Router = Router();
@@ -27,36 +27,52 @@ async function filterImageFromURL(inputURL: string, type: number): Promise<strin
             case 1: await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
-                .greyscale(); // set greyscale
+                .greyscale() // set greyscale
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
             break;
             case 2: await photo
                 .sepia()
                 .resize(256, 256) // resize
-                .quality(60); // set JPEG quality
+                .quality(60) // set JPEG quality
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
             break;
             case 3: await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
-                .blur(7);
+                .blur(7)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
             break;
             case 4: await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
-                .gaussian(7);
+                .gaussian(7)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
             break;
             case 5: await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
-                .mirror(true, false);
+                .mirror(true, false)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
             break;
             default: await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
-                .autocrop();
-        }
-        await photo.write(__dirname + outPath, () => {
+                .mirror(true, false)
+                .sepia()
+                .write(__dirname + outPath, () => {
                 resolve(__dirname + outPath);
             });
+        }
     });
 }
 

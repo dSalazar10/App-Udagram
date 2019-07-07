@@ -48,7 +48,6 @@
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "file-url": "^3.0.0",
-    "image-downloader": "^3.4.2",
     "is-image-url": "^1.1.8",
     "jimp": "^0.6.4",
     "jsonwebtoken": "^8.5.1",
