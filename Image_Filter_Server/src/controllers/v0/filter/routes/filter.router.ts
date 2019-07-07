@@ -2,10 +2,7 @@ import { Router, Request, Response } from 'express';
 import fs, {existsSync} from 'fs';
 import Jimp = require('jimp');
 import { requireAuth } from '../../users/routes/auth.router';
-
 const router: Router = Router();
-const download = require('image-downloader')
-const cv = require('opencv4nodejs');
 
 // Validate URL
 // Does it contain an image file type?
@@ -22,15 +19,42 @@ const urlExists = require('url-exists-deep');
 //    inputURL: string - a publicly accessible url to an image file
 // RETURNS
 //    an absolute path to a filtered image locally saved file
-async function filterImageFromURL(inputURL: string): Promise<string> {
+async function filterImageFromURL(inputURL: string, type: number): Promise<string> {
     return new Promise( async resolve => {
         const photo = await Jimp.read(inputURL);
         const outPath = '/tmp/filtered.' + Math.floor(Math.random() * 2000) + '.jpg';
-        await photo
-            .resize(256, 256) // resize
-            .quality(60) // set JPEG quality
-            .greyscale() // set greyscale
-            .write(__dirname + outPath, () => {
+        switch (type) {
+            case 1: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .greyscale(); // set greyscale
+            break;
+            case 2: await photo
+                .sepia()
+                .resize(256, 256) // resize
+                .quality(60); // set JPEG quality
+            break;
+            case 3: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .blur(7);
+            break;
+            case 4: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .gaussian(7);
+            break;
+            case 5: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .mirror(true, false);
+            break;
+            default: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .autocrop();
+        }
+        await photo.write(__dirname + outPath, () => {
                 resolve(__dirname + outPath);
             });
     });
@@ -48,9 +72,16 @@ async function deleteLocalFiles(files: Array<string>) {
 }
 
 // Filter an image based on a public url
-router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
+/* /api/v0/filter/?type=&?url=
+* 1) grey
+* 2) sepia
+* 3) blur
+* 4) gaussian
+* 5) mirror
+* */
+router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { type, image_url } = req.query;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -61,7 +92,7 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
             return res.status(400).send(`bad image_url`);
         } else {
             // Filter the image
-            filterImageFromURL(image_url).then( (data) => {
+            filterImageFromURL(image_url, type).then( (data) => {
                 // Send the resulting file in the response
                 res.sendFile(data, {}, function (err: any) {
                     if (err) {
@@ -83,56 +114,6 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
         }
     });
 });
-
-
-router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
-    // Type of filter, URL of a publicly accessible image
-    const {type, image_url} = req.query;
-    // Verify type query
-    if (!type) {
-        res.status(400).send(`type required`);
-    }
-    // Verify image_url query and validate url
-    if (!image_url || !isImageUrl(image_url)) {
-        res.status(400).send(`image_url required`);
-    }
-    // Validate url
-    urlExists(image_url).then(function (exists: { href: any; }) {
-        if (!exists) {
-            return res.status(400).send(`bad image_url`);
-        } else {// URL points to a valid public image file
-            const path = __dirname + '/tmp/';
-            const fileName = Math.floor(Math.random() * 2000) + '.jpg';
-            // Download the image from the URL and store it in /tmp/
-            download.image({url: image_url, dest: path + fileName})
-                .then((response: { filename: any, image: any }) => {
-                    // BAD - wait for the file to finish downloading
-                    while (!existsSync(response.filename)) { /* blocking polling loop */}
-                    // Read the image into a cv matrix
-                    const mat = cv.imread(path + fileName);
-                    // Apply the canny filter
-                    mat.canny(50, 50, 3);
-                    // Write the filtered file to /tmp/
-                    cv.imwrite(path + 'filtered.' + fileName, mat);
-                    // respond with the image file
-                    res.sendFile(path + 'filtered.' + fileName, {}, function (err: any) {
-                        if (err) {
-                            console.error(err);
-                        } else {
-                            // Deletes any files on the server on finish of the response
-                            deleteLocalFiles([response.filename, path + 'filtered.' + fileName])
-                                .catch( (derr: any) => {
-                                    console.error(derr);
-                                });
-                        }
-                    });
-                }).catch((err: any) => {
-                    console.error(err);
-                });
-        }
-    });
-});
-
 
 
 export const FilterRouter: Router = router;
