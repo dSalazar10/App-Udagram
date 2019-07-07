@@ -1,8 +1,7 @@
 import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import Jimp = require('jimp');
-import {requireAuth} from '../../users/routes/auth.router';
-
+import { requireAuth } from '../../users/routes/auth.router';
 const router: Router = Router();
 
 // Validate URL
@@ -20,17 +19,60 @@ const urlExists = require('url-exists-deep');
 //    inputURL: string - a publicly accessible url to an image file
 // RETURNS
 //    an absolute path to a filtered image locally saved file
-async function filterImageFromURL(inputURL: string): Promise<string> {
+async function filterImageFromURL(inputURL: string, type: number): Promise<string> {
     return new Promise( async resolve => {
         const photo = await Jimp.read(inputURL);
         const outPath = '/tmp/filtered.' + Math.floor(Math.random() * 2000) + '.jpg';
-        await photo
-            .resize(256, 256) // resize
-            .quality(60) // set JPEG quality
-            .greyscale() // set greyscale
-            .write(__dirname + outPath, (img) => {
+        switch (type) {
+            case 1: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .greyscale() // set greyscale
+                .write(__dirname + outPath, () => {
                 resolve(__dirname + outPath);
             });
+            break;
+            case 2: await photo
+                .sepia()
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
+            break;
+            case 3: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .blur(7)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
+            break;
+            case 4: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .gaussian(7)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
+            break;
+            case 5: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .mirror(true, false)
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
+            break;
+            default: await photo
+                .resize(256, 256) // resize
+                .quality(60) // set JPEG quality
+                .mirror(true, false)
+                .sepia()
+                .write(__dirname + outPath, () => {
+                resolve(__dirname + outPath);
+            });
+        }
     });
 }
 
@@ -46,9 +88,16 @@ async function deleteLocalFiles(files: Array<string>) {
 }
 
 // Filter an image based on a public url
-router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
+/* /api/v0/filter/?type=&?url=
+* 1) grey
+* 2) sepia
+* 3) blur
+* 4) gaussian
+* 5) mirror
+* */
+router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { type, image_url } = req.query;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -59,14 +108,14 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
             return res.status(400).send(`bad image_url`);
         } else {
             // Filter the image
-            filterImageFromURL(image_url).then( (data) => {
+            filterImageFromURL(image_url, type).then( (data) => {
                 // Send the resulting file in the response
-                res.sendFile(data, {}, function (err) {
+                res.sendFile(data, {}, function (err: any) {
                     if (err) {
                         throw err;
                     } else {
                         // Deletes any files on the server on finish of the response
-                        deleteLocalFiles([data]).catch( (derr) => {
+                        deleteLocalFiles([data]).catch( (derr: any) => {
                             if (derr) {
                                 return res.status(400).send(`bad image_url`);
                             }
@@ -81,5 +130,6 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
         }
     });
 });
+
 
 export const FilterRouter: Router = router;
