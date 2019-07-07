@@ -9,219 +9,831 @@
 			"name": "Local Host",
 			"item": [
 				{
-					"name": "valid /api/v0/user/auth/login",
-					"event": [
+					"name": "Public",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"body includes an email and token\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.auth).to.eql(true);",
-									"    pm.expect(jsonData.user).to.not.eql(null);",
-									"    pm.expect(jsonData.token).to.not.eql(null)",
-									"    ",
-									"    pm.environment.set(\"token\", jsonData.token);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 500ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});"
+							"name": "/api/v0/filter/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6384ca60-fd6e-4a2f-85f1-f144d7579b61",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										""
+									]
+								},
+								"description": "Provides the visitor with a nice greeting"
+							},
+							"response": []
+						},
+						{
+							"name": "/api/v0/user/auth/login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"body includes an email and token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.auth).to.eql(true);",
+											"    pm.expect(jsonData.user).to.not.eql(null);",
+											"    pm.expect(jsonData.token).to.not.eql(null)",
+											"    ",
+											"    pm.environment.set(\"token\", jsonData.token);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 600ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
 								],
-								"type": "text/javascript"
-							}
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/api/v0/users/auth/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"users",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/users/auth/login",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "authorized-valid /filteredimage?image_url",
-					"event": [
+					"name": "Authorized",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
+							"name": "/filter/grey?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"grey"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/sepia?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"sepia"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/blur?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"blur"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/gaussian?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"gaussian"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								},
+								"description": "Slow!"
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/mirror?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/invert?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"invert"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
-								{
-									"key": "image_url",
-									"value": "{{SITE}}"
-								}
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "unauthorized /filteredimage?image_url",
-					"event": [
+					"name": "Unauthorized",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "34adc7f3-17d8-499d-9f0b-319aa89e1a68",
-								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
+							"name": "/filter/grey?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"grey"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/sepia?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"sepia"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/blur?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ghvjv",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"blur"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/gaussian?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "j,jh,h",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"gaussian"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/mirror?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "false",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "false",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/invert?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "false",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "false",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"invert"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/filter/demo?image_url={{SITE}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
-								{
-									"key": "image_url",
-									"value": "{{SITE}}"
-								}
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "authorized-bad_url /filteredimage?image_url",
-					"event": [
+					"name": "Invalid",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "960d14bc-45ab-4000-b252-75a4e501ea59",
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});",
-									""
+							"name": "authorized-bad_url /filter/demo?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "960d14bc-45ab-4000-b252-75a4e501ea59",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
 								],
-								"type": "text/javascript"
-							}
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/api/v0/filter/mirror?image_url={{bad_site}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{bad_site}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{host}}/api/v0/filter/demo?image_url={{bad_site}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
-								{
-									"key": "image_url",
-									"value": "{{bad_site}}"
-								}
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				}
 			]
 		},
@@ -229,214 +841,831 @@
 			"name": "Cloud Host",
 			"item": [
 				{
-					"name": "valid /api/v0/user/auth/login",
-					"event": [
+					"name": "Public",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "9e00feb3-c3d2-45ca-b129-90631c015a5e",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"body includes an email and token\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.auth).to.eql(true);",
-									"    pm.expect(jsonData.user).to.not.eql(null);",
-									"    pm.expect(jsonData.token).to.not.eql(null)",
-									"    ",
-									"    pm.environment.set(\"token\", jsonData.token);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 500ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});"
+							"name": "/api/v0/filter/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6384ca60-fd6e-4a2f-85f1-f144d7579b61",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										""
+									]
+								},
+								"description": "Provides the visitor with a nice greeting"
+							},
+							"response": []
+						},
+						{
+							"name": "/api/v0/user/auth/login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"body includes an email and token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.auth).to.eql(true);",
+											"    pm.expect(jsonData.user).to.not.eql(null);",
+											"    pm.expect(jsonData.token).to.not.eql(null)",
+											"    ",
+											"    pm.environment.set(\"token\", jsonData.token);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 600ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
 								],
-								"type": "text/javascript"
-							}
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+								},
+								"url": {
+									"raw": "{{eb_host}}/api/v0/users/auth/login",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"users",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{eb_host}}/api/v0/users/auth/login",
-							"host": [
-								"{{eb_host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"users",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "authorized /filteredimage?image_url",
-					"event": [
+					"name": "Authorized",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "ab7d4826-3bdd-441d-b063-64233f0dc7a6",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
+							"name": "/filter/grey?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"grey"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/sepia?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 2000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"sepia"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/blur?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 2000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"blur"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/gaussian?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 7000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(7000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"gaussian"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								},
+								"description": "Slow!"
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/mirror?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 2000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/invert?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Response time is less than 2000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"invert"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
-							"host": [
-								"{{eb_host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
-								{
-									"key": "image_url",
-									"value": "{{SITE}}"
-								}
-							]
-						}
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "unauthorized /filteredimage?image_url",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{}"
-						},
-						"url": {
-							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{SITE}}",
-							"host": [
-								"{{eb_host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
-								{
-									"key": "image_url",
-									"value": "{{SITE}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "authorized-bad_url /filteredimage?image_url Copy",
-					"event": [
+					"name": "Unauthorized",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"id": "a058b8d4-599c-4459-af49-2d7e672e85a6",
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
+							"name": "/filter/grey?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"grey"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/sepia?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"sepia"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/blur?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ghvjv",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"blur"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/gaussian?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "j,jh,h",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"gaussian"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/mirror?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "false",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "false",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/filter/invert?image_url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1975f970-fc93-4cc5-852e-1abc57cf2138",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 100ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "false",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "false",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"invert"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{SITE}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-						},
-						"url": {
-							"raw": "{{eb_host}}/api/v0/filter/demo?image_url={{bad_site}}",
-							"host": [
-								"{{eb_host}}"
-							],
-							"path": [
-								"api",
-								"v0",
-								"filter",
-								"demo"
-							],
-							"query": [
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Invalid",
+					"item": [
+						{
+							"name": "authorized-bad_url /filter/demo?image_url",
+							"event": [
 								{
-									"key": "image_url",
-									"value": "{{bad_site}}"
+									"listen": "test",
+									"script": {
+										"id": "960d14bc-45ab-4000-b252-75a4e501ea59",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+								},
+								"url": {
+									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{bad_site}}",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"filter",
+										"mirror"
+									],
+									"query": [
+										{
+											"key": "image_url",
+											"value": "{{bad_site}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		}
@@ -446,7 +1675,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjM5MjQ5M30.znSbe8qMD20OcJsqQ0eY1NuvjTm18i1LDhRUVAgWXI8",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjQyODg4NX0.lYRnAbLam74MxBrl7T7aTvICeVqbbAZ4TbtHESIJP68",
 				"type": "string"
 			}
 		]
@@ -475,25 +1704,25 @@
 	],
 	"variable": [
 		{
-			"id": "091a17a9-8ccf-406d-ab18-4a44491b88ad",
+			"id": "95a890ca-bc1a-4592-95a7-f5a95e7456c5",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "d21ee7af-376b-4642-8a5a-0b68c4572f2c",
+			"id": "d5025e5f-2b00-47df-ab8b-e46ad977b89e",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "5c190e1a-bc88-4c06-941c-47cebb028a91",
+			"id": "d09e5364-2393-4f1d-a647-8dd9d0864179",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "34ccada0-b7c4-4001-8207-dcf5133b7a0a",
+			"id": "b659f633-1a19-4989-8843-c93b799cbcc0",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
 			"type": "string"
