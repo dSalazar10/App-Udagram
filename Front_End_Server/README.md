@@ -1,6 +1,9 @@
 # Front End Server
 @TODO: Complete Readme
 
+You can build it with ng or with ionic and put the www files into S3 and serve with cloud front, or you could dockerize it and
+serve it in Elastic Beanstalk.
+
 ## Authors
 This repo was forked from Udacity's GitHub page as per the assignment
 [udacity/cloud-developer](https://github.com/udacity/cloud-developer/tree/master/course-02)
