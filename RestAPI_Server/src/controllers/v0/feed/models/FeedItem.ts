@@ -6,7 +6,10 @@ export class FeedItem extends Model<FeedItem> {
   public caption!: string;
 
   @Column
-  public url!: string;
+  public originalUrl!: string;
+
+  @Column
+  public filterUrl!: string;
 
   @Column
   @CreatedAt

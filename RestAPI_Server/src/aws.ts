@@ -5,7 +5,6 @@ const c = config.dev;
 
 // Configure AWS
 if (c.aws_profile !== 'DEPLOYED') {
-    console.log('\n\n\n\nThis shouldn\'t happen in deployed state\n\n\n\n')
     const credentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
     AWS.config.credentials = credentials;
 }

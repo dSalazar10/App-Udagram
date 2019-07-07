@@ -3,67 +3,21 @@ import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 import {config} from '../../../../config/config';
+import {s3} from '../../../../aws';
 
 const router: Router = Router();
 const axios = require('axios');
 
 
-// This is a demo showing a pass-through to the Image Filter Server
-router.get('/demo',
-    async (req: Request, res: Response) => {
-
-    // Set the headers for the Login Request
-    const postConfig = {
-        headers: {
-            'content-type': 'application/json',
-        }
-    };
-    // Set the payload to be the Login Credentials
-    const data = {
-        email: config.dev.filter_username,
-        password: config.dev.filter_password
-    }
-    const url = config.dev.filter_host;
-    const testImage = 'https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg';
-    // Log In to the Image Filter Server
-    let token;
-    await axios.post(`${url}/users/auth/login`, data, postConfig)
-        .then( (postResponse: { data: { token: any; }; }) => {
-            // Extract the token from the response
-            token = postResponse.data.token;
-
-            // res.status(200).send({auth: true, token: token} );
-        }).catch(function (err: any) {
-            console.log(err);
-            res.status(400).send(`failed to get token`);
-        });
-
-    // Set the headers for the Filter Request
-    const getConfig = {
-        headers: {
-            authorization: `Bearer ${token}`
-        }
-    };
-    // Request for an image to be filtered
-    await axios.get(`${url}/filter/demo?image_url=${testImage}`, getConfig)
-        .then( (getResponse: { data: any; }) => {
-            // Respond with the filtered image
-            res.status(200).send(
-                // Here is the filtered image ready to be stored in S3!
-                new Buffer(getResponse.data).toString('base64')
-            );
-        })
-        .catch(function (err: any) {
-            console.log(err);
-        });
-});
-
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
     items.rows.map((item) => {
-            if (item.url) {
-                item.url = AWS.getGetSignedUrl(item.url);
+            if (item.originalUrl) {
+                if (item.filterUrl) {
+                    item.filterUrl = AWS.getGetSignedUrl(item.filterUrl);
+                }
+                item.originalUrl = AWS.getGetSignedUrl(item.originalUrl);
             }
     });
     res.send(items);
@@ -73,13 +27,46 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id',
     async (req: Request, res: Response) => {
     const { id } = req.params;
-    const item = await FeedItem.findByPk(id).catch( (err) => {
-        if (err) {
-            throw err;
-        }
-        });
+    const item = await FeedItem.findByPk(id);
     res.send(item);
 });
+
+async function filterImage(token: string, id: number, type: string) {
+    // Search for the image to be filtered
+    const item: FeedItem = await FeedItem.findByPk(id);
+    const host: string = config.dev.filter_host;
+    const image: string = AWS.getGetSignedUrl(item.originalUrl);
+    // Set the headers for the Filter Request
+    const getConfig = {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    };
+    // Request for an image to be filtered
+    axios.post(`${host}/api/v0/filter/${type}?image_url=${image}`, getConfig)
+        .then( (getResponse: { data: any; }) => {
+            const filtered_image = new Buffer(getResponse.data).toString('base64');
+            const f_image_name = 'filtered.' + item.originalUrl;
+            // Store the filtered image in S3
+            s3.putObject({
+                Body: filtered_image,
+                Bucket: config.dev.aws_media_bucket,
+                Key: f_image_name
+            });
+            // Update the item with the filtered url
+            const updated_item = item.update({
+                'caption': item.caption,
+                'originalUrl': item.originalUrl,
+                'filteredURL': f_image_name
+            }).catch( (update_throw) => {
+                console.log(update_throw);
+            });
+            /* Do we return the new image?? */
+        })
+        .catch(function (post_throw: any) {
+            console.log(post_throw);
+        });
+}
 
 // update a specific resource
 router.patch('/:id',
@@ -93,7 +80,8 @@ router.patch('/:id',
         }
         // Required JSON body
         const caption = req.body.caption;
-        const fileName = req.body.url;
+        const fileName = req.body.original;
+        const filteredFileName = req.body.filtered;
         // Verify caption
         if (!caption) {
             return res.status(400).send({ message: 'Caption is required or malformed' });
@@ -107,9 +95,10 @@ router.patch('/:id',
         // Update the caption and url
         const updated_item = await item.update({
             'caption': caption,
-            'url': fileName
+            'originalUrl': fileName,
+            'filteredURL': filteredFileName
         });
-        updated_item.url = AWS.getGetSignedUrl(updated_item.url);
+        updated_item.originalUrl = AWS.getGetSignedUrl(updated_item.originalUrl);
         res.status(200).send(updated_item);
 });
 
