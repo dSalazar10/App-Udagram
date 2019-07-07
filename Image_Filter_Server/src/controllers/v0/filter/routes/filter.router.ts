@@ -7,9 +7,6 @@ const router: Router = Router();
 const download = require('image-downloader')
 const cv = require('opencv4nodejs');
 
-// Path to the filter programs
-const filter_path = 'src/controllers/v0/filter/filters';
-
 // Validate URL
 // Does it contain an image file type?
 const isImageUrl = require('is-image-url');
@@ -17,7 +14,6 @@ const isImageUrl = require('is-image-url');
 // Verify URL
 // Does it exist?
 const urlExists = require('url-exists-deep');
-
 
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
@@ -88,32 +84,6 @@ router.get( '/demo', requireAuth, async ( req: Request, res: Response ) => {
     });
 });
 
-// saveImage
-// helper function to save the filtered image locally
-// returns the absolute path to the local image and the file's name
-// INPUTS
-//    inputURL: string - a publicly accessible url to an image file
-// RETURNS
-//    an absolute path to a filtered image locally saved file and the file's name
-async function saveImage(inputURL: string): Promise<string> {
-    const input = __dirname + '/tmp/';
-    return new Promise( async resolve => {
-        const photo = await Jimp.read(inputURL);
-        const fileName = Math.floor(Math.random() * 2000) + '.jpg';
-        await photo.write(input + fileName);
-    });
-}
-
-async function cannyFilter(original: string) {
-    const output = __dirname + '/tmp/';
-    if (fs.existsSync(output + original)) {
-        const mat = cv.imread(output + 'filtered.' + original);
-        mat.canny(50, 50, 3);
-        cv.imwrite(output + 'filtered.' + original, mat);
-        return output + 'filtered.' + original;
-    }
-    return '';
-}
 
 router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
     // Type of filter, URL of a publicly accessible image
@@ -126,36 +96,37 @@ router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
     if (!image_url || !isImageUrl(image_url)) {
         res.status(400).send(`image_url required`);
     }
-
     // Validate url
     urlExists(image_url).then(function (exists: { href: any; }) {
         if (!exists) {
             return res.status(400).send(`bad image_url`);
-        } else {
+        } else {// URL points to a valid public image file
             const path = __dirname + '/tmp/';
             const fileName = Math.floor(Math.random() * 2000) + '.jpg';
+            // Download the image from the URL and store it in /tmp/
             download.image({url: image_url, dest: path + fileName})
                 .then((response: { filename: any, image: any }) => {
+                    // BAD - wait for the file to finish downloading
                     while (!existsSync(response.filename)) { /* blocking polling loop */}
+                    // Read the image into a cv matrix
                     const mat = cv.imread(path + fileName);
+                    // Apply the canny filter
                     mat.canny(50, 50, 3);
+                    // Write the filtered file to /tmp/
                     cv.imwrite(path + 'filtered.' + fileName, mat);
-
+                    // respond with the image file
                     res.sendFile(path + 'filtered.' + fileName, {}, function (err: any) {
                         if (err) {
-                            throw err;
+                            console.error(err);
                         } else {
                             // Deletes any files on the server on finish of the response
                             deleteLocalFiles([response.filename, path + 'filtered.' + fileName])
                                 .catch( (derr: any) => {
-                                    if (derr) {
-                                        return res.status(400).send(`bad image_url`);
-                                    }
+                                    console.error(derr);
                                 });
                         }
                     });
-                })
-                .catch((err: any) => {
+                }).catch((err: any) => {
                     console.error(err);
                 });
         }
