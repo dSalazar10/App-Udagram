@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express';
 import fs, {existsSync} from 'fs';
 import Jimp = require('jimp');
-const download = require('image-downloader')
-import {requireAuth} from '../../users/routes/auth.router';
-const cv = require('opencv4nodejs');
+import { requireAuth } from '../../users/routes/auth.router';
 
 const router: Router = Router();
+const download = require('image-downloader')
+const cv = require('opencv4nodejs');
 
 // Path to the filter programs
 const filter_path = 'src/controllers/v0/filter/filters';
