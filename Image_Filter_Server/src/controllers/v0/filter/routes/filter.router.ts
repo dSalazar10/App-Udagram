@@ -50,7 +50,7 @@ async function invertFilter(photo: Jimp) {
 }
 
 // filterImage
-// Validates the URL, filters the image, sends it back, and deletes local files
+// Validates the URL, filters the image, sends image back, and deletes local files
 // INPUTS
 //     image_url: string - the url of a publicly accessible image
 //     res: Response - the calling function's response variable
@@ -157,30 +157,89 @@ async function deleteLocalFiles(files: Array<string>) {
     }
 }
 
-// Filter an image based on a public url
-/* /api/v0/filter/?type=&?url=
-* 1) grey
-* 2) sepia
-* 3) blur
-* 4) gaussian
-* 5) mirror
-* 6) invert
-* */
-router.get( '/', requireAuth, async ( req: Request, res: Response ) => {
+
+router.get( '/', async ( req: Request, res: Response ) => {
+    res.status(200).send('Udagram Image Filter API');
+});
+
+router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
     }
-    filterImage(image_url, res)
+    filterImage(image_url, res, 1)
         .catch( (filter_throw) => {
             console.log(filter_throw);
         });
-
 });
 
-router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {});
+router.post('/sepia', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    filterImage(image_url, res, 2)
+        .catch( (filter_throw) => {
+            console.log(filter_throw);
+        });
+});
+
+router.post('/blur', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    filterImage(image_url, res, 3)
+        .catch( (filter_throw) => {
+            console.log(filter_throw);
+        });
+});
+
+router.post('/gaussian', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    filterImage(image_url, res, 4)
+        .catch( (filter_throw) => {
+            console.log(filter_throw);
+        });
+});
+
+
+router.post('/mirror', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    filterImage(image_url, res, 5)
+        .catch( (filter_throw) => {
+            console.log(filter_throw);
+        });
+});
+
+router.post('/invert', requireAuth, async ( req: Request, res: Response ) => {
+    // URL of a publicly accessible image
+    const { image_url } = req.query;
+    // Verify query and validate url
+    if ( !image_url || !isImageUrl(image_url) ) {
+        res.status(400).send(`image_url required`);
+    }
+    filterImage(image_url, res, 6)
+        .catch( (filter_throw) => {
+            console.log(filter_throw);
+        });
+});
 
 
 export const FilterRouter: Router = router;
