@@ -38,6 +38,9 @@ Base URL for Rest API is http://api.udagram.me/api/v0
  
  Base URL for Image Filter API is http://filter.udagram.me/api/v0
  
+ Postman Collection can be found 
+[here](https://github.com/dSalazar10/App-Udagram/blob/master/Image_Filter_Server/Image_Filter_Server.postman_collection.json)
+
  /filter
    - `GET /` reserved
    - `POST /grey` (requires auth)
