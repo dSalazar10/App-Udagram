@@ -15,7 +15,7 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 ### Rest API
 
-Base URL for Rest API is http://udagram.me/api/v0
+Base URL for Rest API is http://api.udagram.me/
 
 /feed
   - `GET /` get all images
