@@ -1,7 +1,7 @@
 # Udagram
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
-![](Server_Overview.png)
+![](Project_Overview.png)
 
 Tasks completed:
 1) Practice handeling routing in Nodejs/Express with the Practice_Server
