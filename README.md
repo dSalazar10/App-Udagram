@@ -14,16 +14,16 @@ Base URL is http://udagram.me/api/v0
 ## Endpoints
 
 /feed 
-|--get all images
-|--get a specific image
-|--update a specific image
-|--get signedURL
+  - get all images
+  -get a specific image
+  -update a specific image
+  -get signedURL
   
 /user
-|--get verified
-|--post login
-|--register new users
+  -get verified
+  -post login
+  -register new users
   
  /user/auth
- |-- TODO: complete docs
+  - TODO: complete docs
   
