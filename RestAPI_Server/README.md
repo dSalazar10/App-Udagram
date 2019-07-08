@@ -1,6 +1,8 @@
 # RestAPI Server
 
-The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
+![Backend](./tutorial/RestAPI.png)
+
+The RestAPI Server is a nodejs/typescript cloud server which
 * Manages user authentication, storing emails and password hashes in an AWS Relational Database Service (DB)
 * Manages user data, storing images in an AWS Simple Storage Service (FS)
 * Manages image filters using the Image_Filter_Server (top server)
