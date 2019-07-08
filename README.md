@@ -1,7 +1,7 @@
 ![logo](logo.png)
 -------------------
 ![pass](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg) 
+![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg)
 ![Language](https://img.shields.io/badge/Language-Typescript-blue.svg)
 ![size](https://img.shields.io/github/repo-size/dsalazar10/App-Udagram.svg)
 
@@ -9,21 +9,27 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 ![](Main.png)
 
-Base URL is http://udagram.me/api/v0
+Base URL for API is /api/v0
 
 ## Endpoints
 
-/feed 
-  - get all images
-  -get a specific image
-  -update a specific image
-  -get signedURL
+/feed
+  - `GET /` get all images
+  - `GET /:id` get a specific image
+  - `GET /signed-url/:fileName` (requires auth) get signedURL
+  - `GET /` (requires auth) upload an image
+  - `PATCH /:id` (requires auth) update a specific image
+
   
 /user
-  -get verified
-  -post login
-  -register new users
+  - `GET /` reserved
+  - `GET /:id` get a specific user
   
  /user/auth
-  - TODO: complete docs
+  - `GET /` reserved
+  - `GET /verification` (requires auth) verify credentials are valid
+  - `POST /` register a new user
+  - `POST /login` login
+
+ 
   
