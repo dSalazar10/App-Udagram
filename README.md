@@ -12,7 +12,10 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 ## Endpoints
 
-Base URL for API is /api/v0
+
+### Rest API
+
+Base URL for Rest API is http://udagram.me/api/v0
 
 /feed
   - `GET /` get all images
@@ -21,7 +24,6 @@ Base URL for API is /api/v0
   - `GET /` (requires auth) upload an image
   - `PATCH /:id` (requires auth) update a specific image
 
-  
 /user
   - `GET /` reserved
   - `GET /:id` get a specific user
@@ -32,5 +34,25 @@ Base URL for API is /api/v0
   - `POST /` register a new user
   - `POST /login` login
 
+ ### Image Filter
  
+ Base URL for Image Filter API is http://filter.udagram.me/api/v0
+ 
+ /filter
+   - `GET /` reserved
+   - `POST /grey` filter 
+   - `POST /sepia` filter 
+   - `POST /blur` filter 
+   - `POST /gaussian` filter 
+   - `POST /mirror` filter 
+   - `POST /invert` filter 
+ 
+  /user
+  - `GET /` reserved
+  - `GET /:id` get a specific user
   
+ /user/auth
+  - `GET /` reserved
+  - `GET /verification` (requires auth) verify credentials are valid
+  - `POST /` register a new user
+  - `POST /login` login
