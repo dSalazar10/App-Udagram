@@ -28,6 +28,7 @@ export const environment = {
   production: false,
   appName: 'Udagram',
   apiHost: 'http://udagram-restapi-prod.us-east-2.elasticbeanstalk.com/api/v0',
+
 };
 
 /*
