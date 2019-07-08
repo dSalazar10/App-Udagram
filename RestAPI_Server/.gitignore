@@ -32,6 +32,7 @@ postgres_dev/
 logfile
 
 .DS_Store
+builds.txt
 Thumbs.db
 UserInterfaceState.xcuserstate
 node_modules

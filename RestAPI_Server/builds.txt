@@ -1,0 +1,47 @@
+Dev:
+
+branch-defaults:
+  default:
+    environment: udagram-restapi-dev
+    group_suffix: null
+deploy:
+  artifact: ./www/Archive.zip
+global:
+  application_name: udagram-restapi
+  branch: null
+  default_ec2_keyname: aws-eb
+  default_platform: Node.js
+  default_region: us-east-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
+
+Prod:
+
+branch-defaults:
+  default:
+    environment: udagram-restapi-prod
+environment-defaults:
+  udagram-restapi-prod:
+    branch: null
+    repository: null
+deploy:
+  artifact: ./www/Archive.zip
+global:
+  application_name: udagram-restapi
+  default_ec2_keyname: aws-eb
+  default_platform: arn:aws:elasticbeanstalk:us-east-2::platform/Node.js running on
+    64bit Amazon Linux/4.9.2
+  default_region: us-east-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: null
+  workspace_type: Application
