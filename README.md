@@ -4,7 +4,8 @@
 ![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg) 
 ![Language](https://img.shields.io/badge/Language-Typescript-blue.svg)
 ![size](https://img.shields.io/github/repo-size/dsalazar10/App-Udagram.svg)
-![commit](https://img.shields.io/github/commit-activity/m/dsalazar10/App-Udagram.svg)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dsalazar10/App-Udagram.svg)
+
 
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
