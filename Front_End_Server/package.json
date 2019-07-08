@@ -1,8 +1,6 @@
 {
-  "name": "udacity-c2-frontend",
+  "name": "udagram-frontend",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,6 +13,16 @@
     "clean": "npm run cleandist && npm run cleanarc",
     "deploy": "npm run clean && ng build --prod && cd output/ && zip -r Archive.zip . && cd .."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dSalazar10/App-Udagram.git"
+  },
+  "author": "Daniel Salazar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dSalazar10/App-Udagram/issues"
+  },
+  "homepage": "https://github.com/dSalazar10/App-Udagram",
   "private": true,
   "dependencies": {
     "@angular/common": "^8.1.0",
@@ -58,6 +66,5 @@
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.4.5"
-  },
-  "description": "An Ionic project"
+  }
 }

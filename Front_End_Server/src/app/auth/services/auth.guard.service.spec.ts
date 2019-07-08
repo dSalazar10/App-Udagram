@@ -20,10 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { TestBed } from '@angular/core/testing';
-
-import { AuthGuardService } from './auth.guard.service';
-import { RouterTestingModule } from '@angular/router/testing';
+import {TestBed} from '@angular/core/testing';
+import {AuthGuardService} from './auth.guard.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AuthGuardService', () => {
   beforeEach(() => TestBed.configureTestingModule({

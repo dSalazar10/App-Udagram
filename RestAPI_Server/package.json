@@ -1,7 +1,7 @@
 {
-  "name": "udacity-c2-restapi",
+  "name": "udagram-restapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Manages authentication and data",
   "main": "src/server.js",
   "scripts": {
     "start": "node .",
@@ -13,8 +13,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Gabriel Ruttner",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dSalazar10/App-Udagram.git"
+  },
+  "author": "Daniel Salazar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dSalazar10/App-Udagram/issues"
+  },
+  "homepage": "https://github.com/dSalazar10/App-Udagram#readme",
   "dependencies": {
     "@angular/compiler": "^8.0.3",
     "@angular/core": "^8.0.3",

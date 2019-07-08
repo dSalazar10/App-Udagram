@@ -20,10 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Router, Request, Response } from 'express';
+import {Router, Request, Response} from 'express';
+import {requireAuth} from '../../users/routes/auth.router';
 import fs from 'fs';
 import Jimp = require('jimp');
-import { requireAuth } from '../../users/routes/auth.router';
+
 const router: Router = Router();
 
 // Validate URL
@@ -179,11 +180,13 @@ async function deleteLocalFiles(files: Array<string>) {
     }
 }
 
+/* Endpoints */
 
-router.get( '/', async ( req: Request, res: Response ) => {
-    res.status(200).send('Udagram Image Filter API');
+// Display information about the API
+router.get( '/', async ( req, res ) => {
+    res.sendFile('filter_display.html', {root: __dirname });
 });
-
+// Grey Filter
 router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -196,7 +199,7 @@ router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
+// Sepia Filter
 router.post('/sepia', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -209,7 +212,7 @@ router.post('/sepia', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
+// Blur Filter
 router.post('/blur', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -222,7 +225,7 @@ router.post('/blur', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
+// Gaussian Filter
 router.post('/gaussian', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -235,8 +238,7 @@ router.post('/gaussian', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
-
+// Mirror Filter
 router.post('/mirror', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -249,7 +251,7 @@ router.post('/mirror', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
+// Invert Filter
 router.post('/invert', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
     const { image_url } = req.query;
@@ -262,6 +264,5 @@ router.post('/invert', requireAuth, async ( req: Request, res: Response ) => {
             console.log(filter_throw);
         });
 });
-
 
 export const FilterRouter: Router = router;
