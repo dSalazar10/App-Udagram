@@ -14,12 +14,16 @@ Base URL is http://udagram.me/api/v0
 ## Endpoints
 
 /feed 
-  * Display the collection of all images
-  * search for a specific image
-  * update a specific image
-  * get one time use S3 PutObject
-  URL link.
+|--get all images
+|--get a specific image
+|--update a specific image
+|--get signedURL
   
 /user
-  Find a user by id
+|--get verified
+|--post login
+|--register new users
+  
+ /user/auth
+ |-- TODO: complete docs
   
