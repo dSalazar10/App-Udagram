@@ -6,7 +6,9 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 * Manages image filters using the Image_Filter_Server (top server)
 ![](Server_Overview.png)
 
-## **TABLE OF CONTENT**
+
+---------------------------------------------
+### **TABLE OF CONTENT**
 * [Prerequisites](#prereqs)
 * [Getting Started](#getting-started)
 * [Setting up the database](#setting-up-database)
@@ -18,7 +20,7 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 * [Cloud Deployment](#cloud-deploy)
 * [Running the Cloud Tests](#cloud-testing)
 
-
+---------------------------------------------
 
 
 <a name="prereqs"></a>
