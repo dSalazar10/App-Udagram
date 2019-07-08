@@ -10,7 +10,6 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 ---------------------------------------------
 ### **TABLE OF CONTENT**
 * [Prerequisites](#prereqs)
-* [Getting Started](#getting-started)
 * [Setting up the database](#setting-up-database)
 * [Setting up Postbird](#setting-up-postbird)
 * [Setting up the Filestore](#setting-up-filestore)
@@ -34,8 +33,6 @@ See the [wiki](https://github.com/dSalazar10/App-Udagram/wiki/Getting-Setup) for
 * Amazon Web Services Account
 * AWS CLI
 
-
-<a name="getting-started"></a>
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and 
@@ -178,7 +175,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 * The server can be located at `http://localhost:8080`
 
 <a name="local-testing"></a>
-## Running the local tests
+### Running the local tests
 
 * Open Postman and close the startup menu
 * Type in ` http://localhost:8080/` and hit send
@@ -211,16 +208,21 @@ Authorized:
 - test posting an image with valid credentials and a malformed payload
 - test posting an image with valid credentials and valid payload
 
+
+## AWS Cloud Development
+
 <a name="cloud-deploy"></a>
-## Cloud Deployment
+### Cloud Deployment
 
 @TODO: Complete Cloud Deployment Tutorial
 
 <a name="cloud-testing"></a>
-## Running the Cloud Tests
+### Running the Cloud Tests
 
 @TODO Complete Cloud Testing Tutorial
 
+
+------------------------
 ## Built With
 
 * [sequelize-typescript](https://www.npmjs.com/package/sequelize-typescript) a promise-based Node.js + typescrpt 
