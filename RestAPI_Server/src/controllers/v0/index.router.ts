@@ -30,7 +30,7 @@ router.use('/feed', FeedRouter);
 router.use('/users', UserRouter);
 
 router.get('/', async (req: Request, res: Response) => {
-    res.send(`V0`);
+    res.sendFile('index_router_index.html', {root: __dirname });
 });
 
 export const IndexRouter: Router = router;

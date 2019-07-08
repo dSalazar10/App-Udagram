@@ -1,7 +1,7 @@
 {
-  "name": "udacity-c2-restapi",
+  "name": "udagram-restapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Manages authentication and data",
   "main": "src/server.js",
   "scripts": {
     "start": "node .",
@@ -13,8 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Gabriel Ruttner",
-  "license": "ISC",
+  "author": "Daniel Salazar",
+  "license": "MIT",
   "dependencies": {
     "@angular/compiler": "^8.0.3",
     "@angular/core": "^8.0.3",

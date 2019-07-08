@@ -41,10 +41,10 @@ import {V0MODELS} from './controllers/v0/model.index';
   // Redirect to index router for /api/v0/
   app.use('/api/v0/', IndexRouter);
   app.get( '/', async ( req, res ) => {
-    res.sendFile('server_index.html', {root: __dirname });
+    res.sendFile('server_display.html', {root: __dirname });
   });
   app.get( '/api', async ( req, res ) => {
-    res.sendFile('server_index.html', {root: __dirname });
+    res.sendFile('server_display.html', {root: __dirname });
   });
   // Start the Server
   app.listen( port, () => {
