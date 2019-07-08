@@ -1,4 +1,6 @@
 # Image Filter Server
+
+![](./tutorial/Filter.png)
 @TODO: Complete Readme
 
 ## Authors
