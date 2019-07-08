@@ -13,8 +13,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dSalazar10/App-Udagram.git"
+  },
   "author": "Daniel Salazar",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dSalazar10/App-Udagram/issues"
+  },
+  "homepage": "https://github.com/dSalazar10/App-Udagram#readme",
   "dependencies": {
     "@angular/compiler": "^8.0.3",
     "@angular/core": "^8.0.3",

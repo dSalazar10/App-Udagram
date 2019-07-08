@@ -20,9 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Router, Request, Response } from 'express';
-import { FilterRouter } from './filter/routes/filter.router';
-import { UserRouter } from './users/routes/user.router';
+import {Router, Request, Response} from 'express';
+import {FilterRouter} from './filter/routes/filter.router';
+import {UserRouter} from './users/routes/user.router';
 
 const router: Router = Router();
 
@@ -30,7 +30,7 @@ router.use('/filter', FilterRouter);
 router.use('/users', UserRouter);
 
 router.get('/', async (req: Request, res: Response) => {
-    res.send({index1: `filter`});
+    res.sendFile('index_router_index.html', {root: __dirname });
 });
 
 export const IndexRouter: Router = router;

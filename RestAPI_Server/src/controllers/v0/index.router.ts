@@ -20,9 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Router, Request, Response } from 'express';
-import { FeedRouter } from './feed/routes/feed.router';
-import { UserRouter } from './users/routes/user.router';
+import {Router, Request, Response} from 'express';
+import {FeedRouter} from './feed/routes/feed.router';
+import {UserRouter} from './users/routes/user.router';
 
 const router: Router = Router();
 
