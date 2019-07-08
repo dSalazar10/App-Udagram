@@ -20,41 +20,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import express, { Request, Response, Router } from 'express';
-import { IndexRouter } from './controllers/v0/index.router';
+import {IndexRouter} from './controllers/v0/index.router';
+import {V0MODELS} from './controllers/v0/model.index';
+import {sequelize} from './sequelize';
 import bodyParser from 'body-parser';
-import { V0MODELS } from './controllers/v0/model.index';
-import { sequelize } from './sequelize';
+import express from 'express';
 
 (async () => {
-
   await sequelize.addModels(V0MODELS);
   await sequelize.sync();
-
   const app = express();
   const port = process.env.PORT || 8082;
-
   app.use(bodyParser.json());
-
-  // CORS Should be restricted
-  app.use(function(req: any,
-                   res: { header: {
-                     (arg0: string, arg1: string): void;
-                     (arg0: string, arg1: string): void;
-                   }; }, next: () => void) {
-    // This is the port that the Ionic Server uses
-    res.header('Access-Control-Allow-Origin', 'http://localhost:8100');
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
   });
-
+  // Redirect to index router for /api/v0/
   app.use('/api/v0/', IndexRouter);
-
-  // Root URI call
-  app.get( '/', async ( req: any, res: { send: (arg0: string) => void; } ) => {
-    res.send( '/api/v0/' );
+  app.get( '/', async ( req, res ) => {
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Use /api/v0 to access the API</p>\n' +
+        '</body>\n' +
+        '</html>\n');
   });
-
   // Start the Server
   app.listen( port, () => {
       console.log( `server running http://localhost:${ port }` );

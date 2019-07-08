@@ -20,18 +20,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Sequelize } from 'sequelize-typescript';
-import { config } from './config/config';
+import {Sequelize} from 'sequelize-typescript';
+import {config} from './config/config';
+
 
 const c = config.dev;
-
-// Instantiate new Sequelize instance!
 export const sequelize = new Sequelize({
   'username': c.username,
   'password': c.password,
   'database': c.database,
   'host':     c.host,
-
   dialect: 'postgres',
   storage: ':memory:',
 });

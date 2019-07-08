@@ -20,16 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-
-import { FeedListComponent } from './feed-list/feed-list.component';
-import { FeedItemComponent } from './feed-item/feed-item.component';
-import { FeedUploadComponent } from './feed-upload/feed-upload.component';
-import { FeedUploadButtonComponent } from './feed-upload/feed-upload-button/feed-upload-button.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
+import {RouterModule} from '@angular/router';
+import {FeedListComponent} from './feed-list/feed-list.component';
+import {FeedItemComponent} from './feed-item/feed-item.component';
+import {FeedUploadComponent} from './feed-upload/feed-upload.component';
+import {FeedUploadButtonComponent} from './feed-upload/feed-upload-button/feed-upload-button.component';
 
 import { FeedProviderService } from './services/feed.provider.service';
 

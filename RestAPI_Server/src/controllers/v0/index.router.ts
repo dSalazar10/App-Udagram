@@ -20,9 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Router, Request, Response } from 'express';
-import { FeedRouter } from './feed/routes/feed.router';
-import { UserRouter } from './users/routes/user.router';
+import {Router, Request, Response} from 'express';
+import {FeedRouter} from './feed/routes/feed.router';
+import {UserRouter} from './users/routes/user.router';
 
 const router: Router = Router();
 
@@ -30,7 +30,20 @@ router.use('/feed', FeedRouter);
 router.use('/users', UserRouter);
 
 router.get('/', async (req: Request, res: Response) => {
-    res.send(`V0`);
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Use /v0 to access the API</p>\n' +
+        '</body>\n' +
+        '</html>\n');
 });
 
 export const IndexRouter: Router = router;

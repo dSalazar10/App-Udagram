@@ -41,10 +41,36 @@ import {V0MODELS} from './controllers/v0/model.index';
   // Redirect to index router for /api/v0/
   app.use('/api/v0/', IndexRouter);
   app.get( '/', async ( req, res ) => {
-    res.sendFile('server_index.html', {root: __dirname });
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Use /api/v0 to access the API</p>\n' +
+        '</body>\n' +
+        '</html>\n');
   });
   app.get( '/api', async ( req, res ) => {
-    res.sendFile('server_index.html', {root: __dirname });
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Use /api/v0 to access the API</p>\n' +
+        '</body>\n' +
+        '</html>\n');
   });
   // Start the Server
   app.listen( port, () => {

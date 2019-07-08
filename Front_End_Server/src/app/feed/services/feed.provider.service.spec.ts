@@ -20,9 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { TestBed } from '@angular/core/testing';
-
-import { FeedProviderService } from './feed.provider.service';
+import {TestBed} from '@angular/core/testing';
+import {FeedProviderService} from './feed.provider.service';
 
 describe('Feed.ProviderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
