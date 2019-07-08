@@ -18,7 +18,7 @@ Tasks completed:
 - Login
 - Add image/comment
 
-4) Deploying a secong Nodejs/Express RestAPI server with the Image_Filter_Server
+4) Deploying a second Nodejs/Express RestAPI server with the Image_Filter_Server
 - Image processing with Jimp based on RESTful queries
 - Added features include basic authentication and URL validation
 
