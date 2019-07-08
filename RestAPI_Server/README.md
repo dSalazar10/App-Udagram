@@ -6,6 +6,22 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 * Manages image filters using the Image_Filter_Server (top server)
 ![](Server_Overview.png)
 
+## **TABLE OF CONTENT**
+* [Prerequisites](#prereqs)
+* [Getting Started](#getting-started)
+* [Setting up the database](#setting-up-database)
+* [Setting up Postbird](#setting-up-postbird)
+* [Setting up the Filestore](#setting-up-filestore)
+* [Setting up an AWS User Account](#setting-up-account)
+* [Setting up the local server](#setting-up-local)
+* [Running the local tests](#local-testing)
+* [Cloud Deployment](#cloud-deploy)
+* [Running the Cloud Tests](#cloud-testing)
+
+
+
+
+<a name="prereqs"></a>
 ### Prerequisites
 
 See the [wiki](https://github.com/dSalazar10/App-Udagram/wiki/Getting-Setup) for instructions on installing the following:
@@ -17,11 +33,13 @@ See the [wiki](https://github.com/dSalazar10/App-Udagram/wiki/Getting-Setup) for
 * AWS CLI
 
 
+<a name="getting-started"></a>
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and 
 testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+<a name="setting-up-database"></a>
 ### Setting up the database
 
 * Go to the main page of AWS [here](https://aws.amazon.com).
@@ -55,6 +73,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   - Navigate to the database to obtain the endpoint url
   ![](./tutorial/L4-4i.png)
   
+<a name="setting-up-postbird"></a>
 ### Setting up Postbird
 
 * Open Postbird
@@ -65,7 +84,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 ![](./tutorial/L5-3.png)
 * Now your Database setup is complete. Great job!
 
-
+<a name="setting-up-filestore"></a>
 ### Setting up the Filestore
 
 * On the main page of AWS, click Services and search for S3
@@ -94,6 +113,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   ![](./tutorial/L6-5c.png)
   - Click Save
 
+<a name="setting-up-account"></a>
 ### Setting up an AWS User Account
 
 * Navigate to the AWS home page and search services for IAM
@@ -141,7 +161,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 * For instructions on how to configure the Amazon Web Services Command Line Interface (aws-cli) go 
 [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
-
+<a name="setting-up-local"></a>
 ### Setting up the local server
 
 * Clone the repo
@@ -155,6 +175,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 ![](./tutorial/L2-6.png)
 * The server can be located at `http://localhost:8080`
 
+<a name="local-testing"></a>
 ## Running the local tests
 
 * Open Postman and close the startup menu
@@ -188,10 +209,12 @@ Authorized:
 - test posting an image with valid credentials and a malformed payload
 - test posting an image with valid credentials and valid payload
 
+<a name="cloud-deploy"></a>
 ## Cloud Deployment
 
 @TODO: Complete Cloud Deployment Tutorial
 
+<a name="cloud-testing"></a>
 ## Running the Cloud Tests
 
 @TODO Complete Cloud Testing Tutorial
