@@ -1,8 +1,9 @@
 # Front End Server
 
 ![](./tutorial/Frontend.png)
-@TODO: Complete Readme
 
+Making requests to our server through our api service and feature service, providing data to views.
+This was provided as a way for you to test your Back end without having to develop anything.
 You can build it with ng or with ionic and put the www files into S3 and serve with cloud front, or you could dockerize it and
 serve it in Elastic Beanstalk.
 
