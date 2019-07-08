@@ -15,7 +15,7 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 * [Setting up Postbird](#setting-up-postbird)
 * [Setting up the Filestore](#setting-up-filestore)
 * [Setting up an AWS User Account](#setting-up-account)
-* [Setting up the local server](#setting-up-local)
+* [Local Deployment](#setting-up-local)
 * [Running the local tests](#local-testing)
 * [Cloud Deployment](#cloud-deploy)
 * [Running the Cloud Tests](#cloud-testing)
@@ -164,7 +164,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 <a name="setting-up-local"></a>
-### Setting up the local server
+### Local Deployment
 
 * Clone the repo
 ![](./tutorial/L2-2.png)
