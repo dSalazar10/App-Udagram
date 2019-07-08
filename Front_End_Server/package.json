@@ -9,7 +9,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cleandist": "rm -rf output/dist/ || true",
+    "cleanarc": "rm output/Archive.zip || true",
+    "clean": "npm run cleandist && npm run cleanarc",
+    "deploy": "npm run clean && ng build --prod && cd output/ && zip -r Archive.zip . && cd .."
   },
   "private": true,
   "dependencies": {
