@@ -7,7 +7,7 @@
 
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
-![](Project_Overview.png)
+![](Main.png)
 
 Tasks completed:
 1) Practice handeling routing in Nodejs/Express with the Practice_Server
