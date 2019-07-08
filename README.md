@@ -1,4 +1,4 @@
-# Udagram
+# Udagram ![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg)
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
 ![](Project_Overview.png)
