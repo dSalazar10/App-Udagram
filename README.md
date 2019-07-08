@@ -1,4 +1,10 @@
-# Udagram ![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg)
+# Udagram 
+![pass](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg) 
+![Language](https://img.shields.io/badge/Language-Typescript-blue.svg)
+![size](https://img.shields.io/github/repo-size/dsalazar10/App-Udagram.svg)
+![commit](https://img.shields.io/github/commit-activity/m/dsalazar10/App-Udagram.svg)
+
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
 ![](Project_Overview.png)
