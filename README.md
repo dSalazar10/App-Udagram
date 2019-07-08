@@ -40,12 +40,19 @@ Base URL for Rest API is http://udagram.me/api/v0
  
  /filter
    - `GET /` reserved
-   - `POST /grey` filter 
-   - `POST /sepia` filter 
-   - `POST /blur` filter 
-   - `POST /gaussian` filter 
-   - `POST /mirror` filter 
-   - `POST /invert` filter 
+   ![](./Image_Filter_Server/tutorial/original.jpeg)
+   - `POST /grey` filter
+   ![](./Image_Filter_Server/tutorial/grey.jpeg)
+   - `POST /sepia` filter
+   ![](./Image_Filter_Server/tutorial/sepia.jpeg)
+   - `POST /blur` filter
+   ![](./Image_Filter_Server/tutorial/blur.jpeg)
+   - `POST /gaussian` filter
+   ![](./Image_Filter_Server/tutorial/gaussian.jpeg)
+   - `POST /mirror` filter
+   ![](./Image_Filter_Server/tutorial/mirror.jpeg)
+   - `POST /invert` filter
+   ![](./Image_Filter_Server/tutorial/invert.jpeg)
  
   /user
   - `GET /` reserved
