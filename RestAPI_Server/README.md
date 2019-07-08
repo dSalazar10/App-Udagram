@@ -8,7 +8,7 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 
 ### Prerequisites
 
-
+See the [wiki](https://github.com/dSalazar10/App-Udagram/wiki/Getting-Setup) for instructions on installing the following:
 * Nodejs and NPM
 * Postman
 * Postbird
@@ -16,26 +16,6 @@ The RestAPI Server (bottom server) is a nodejs/typescript cloud server which
 * Amazon Web Services Account
 * AWS CLI
 
-### Installing
-
-The server is dependent on Nodejs and Node Package Manager. 
-* Installation instructions can be found [here](https://nodejs.org/en/download/)
-* To test if Nodejs is installed, execute the following code in your terminal: `npm -v`
-
-We can issue and save requests to the server with ease using Postman. 
-* Installation instruction can be found [here](https://www.getpostman.com/downloads/).
-
-We can interact with our database with ease using Postbird.
-* Installation instructions can be found [here](https://github.com/paxa/postbird).
-
-We can interact with our repo with ease using Visual Studio Code.
-* Installation instructions can be found [here](https://code.visualstudio.com/docs/setup/setup-overview).
-
-We will be using multiple services provided by Amazon Web Services, so you will need to set up an account.
-* Instructions can be found [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
-
-We will be interacting with our AWS services using the command line, so you will need the AWS CLI
-* Instructions can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
 ## Getting Started
 
