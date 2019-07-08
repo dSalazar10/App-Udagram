@@ -33,6 +33,7 @@ $RECYCLE.BIN/
 .DS_Store
 builds.txt
 Thumbs.db
+package-lock.json
 UserInterfaceState.xcuserstate
 node_modules
 venv/

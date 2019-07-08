@@ -184,7 +184,20 @@ async function deleteLocalFiles(files: Array<string>) {
 
 // Display information about the API
 router.get( '/', async ( req, res ) => {
-    res.sendFile('filter_display.html', {root: __dirname });
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Welcome to the Image Filter API</p>\n' +
+        '</body>\n' +
+        '</html>\n');
 });
 // Grey Filter
 router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {

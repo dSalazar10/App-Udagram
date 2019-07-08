@@ -32,7 +32,20 @@ router.use('/auth', AuthRouter);
 
 // Display info for /user
 router.get('/', async (req: Request, res: Response) => {
-    res.sendFile('user_router_index.html', {root: __dirname });
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>Nothing to see here.</p>\n' +
+        '</body>\n' +
+        '</html>\n');
 });
 // Search for a specific user
 router.get('/:id', async (req: Request, res: Response) => {

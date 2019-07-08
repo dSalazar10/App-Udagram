@@ -67,7 +67,20 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 /* Endpoints */
 
 router.get('/', async (req: Request, res: Response) => {
-    res.sendFile('auth_router_index.html', {root: __dirname });
+    res.send('<!doctype html>\n' +
+        '\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <title>Udagram</title>\n' +
+        '  <meta name="description" content="Udagram">\n' +
+        '  <meta name="author" content="Daniel">\n' +
+        '</head>\n' +
+        '\n' +
+        '<body>\n' +
+        '    <p>/auth</p>\n' +
+        '</body>\n' +
+        '</html>\n');
 });
 // Verify credentials are valid
 router.get('/verification',
