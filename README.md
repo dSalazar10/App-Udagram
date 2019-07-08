@@ -9,9 +9,10 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 ![](Main.png)
 
-Base URL for API is /api/v0
 
 ## Endpoints
+
+Base URL for API is /api/v0
 
 /feed
   - `GET /` get all images
