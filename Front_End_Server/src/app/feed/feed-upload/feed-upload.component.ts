@@ -20,13 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api/api.service';
-
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { FeedProviderService } from '../services/feed.provider.service';
-
-import { LoadingController, ModalController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from 'src/app/api/api.service';
+import {Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import {FeedProviderService} from '../services/feed.provider.service';
+import {LoadingController, ModalController} from '@ionic/angular';
 
 
 @Component({

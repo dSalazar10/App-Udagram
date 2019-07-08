@@ -20,11 +20,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Injectable } from '@angular/core';
-import { FeedItem, feedItemMocks } from '../models/feed-item.model';
-import { BehaviorSubject } from 'rxjs';
-
-import { ApiService } from '../../api/api.service';
+import {Injectable} from '@angular/core';
+import {FeedItem, feedItemMocks} from '../models/feed-item.model';
+import {BehaviorSubject} from 'rxjs';
+import {ApiService} from '../../api/api.service';
 
 @Injectable({
   providedIn: 'root'

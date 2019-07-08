@@ -20,11 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { ApiService } from 'src/app/api/api.service';
-import { catchError, tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {User} from '../models/user.model';
+import {ApiService} from 'src/app/api/api.service';
+import {catchError, tap} from 'rxjs/operators';
 
 const JWT_LOCALSTORE_KEY = 'jwt';
 const USER_LOCALSTORE_KEY = 'user';

@@ -20,11 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { FeedUploadComponent } from '../feed-upload.component';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { Subscription } from 'rxjs';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ModalController} from '@ionic/angular';
+import {FeedUploadComponent} from '../feed-upload.component';
+import {AuthService} from 'src/app/auth/services/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-feed-upload-button',

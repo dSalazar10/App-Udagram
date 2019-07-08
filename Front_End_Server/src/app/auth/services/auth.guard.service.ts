@@ -20,10 +20,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, UrlTree} from '@angular/router';
+import {AuthService} from './auth.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

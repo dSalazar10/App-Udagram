@@ -20,9 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {ApiService} from './api.service';
 
 const components = [];
 

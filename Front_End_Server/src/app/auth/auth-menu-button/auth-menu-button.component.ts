@@ -20,13 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { AuthMenuUserComponent } from './auth-menu-user/auth-menu-user.component';
-
-import { AuthService } from '../services/auth.service';
-import { AuthLoginComponent } from '../auth-login/auth-login.component';
-import { AuthRegisterComponent } from '../auth-register/auth-register.component';
+import {Component, OnInit} from '@angular/core';
+import {ModalController} from '@ionic/angular';
+import {AuthMenuUserComponent} from './auth-menu-user/auth-menu-user.component';
+import {AuthService} from '../services/auth.service';
+import {AuthLoginComponent} from '../auth-login/auth-login.component';
+import {AuthRegisterComponent} from '../auth-register/auth-register.component';
 
 @Component({
   selector: 'app-auth-menu-button',

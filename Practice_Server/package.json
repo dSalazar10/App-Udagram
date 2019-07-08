@@ -1,7 +1,7 @@
 {
-  "name": "udacity-c2-basic-server",
+  "name": "udagram-basic-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Practice with a local server",
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register src/**/*.tests.ts",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grutt/udacity-c2-basic-server.git"
+    "url": "git+https://github.com/dSalazar10/App-Udagram.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Daniel Salazar",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/grutt/udacity-c2-basic-server/issues"
+    "url": "https://github.com/dSalazar10/App-Udagram/issues"
   },
-  "homepage": "https://github.com/grutt/udacity-c2-basic-server#readme",
+  "homepage": "https://github.com/dSalazar10/App-Udagram",
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
     "@types/chai": "^4.1.7",

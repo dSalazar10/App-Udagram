@@ -20,8 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FeedItem } from '../models/feed-item.model';
+import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {FeedItem} from '../models/feed-item.model';
 
 @Component({
   selector: 'app-feed-item',

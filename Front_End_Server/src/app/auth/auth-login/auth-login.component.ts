@@ -20,13 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
-import { ModalController } from '@ionic/angular';
-
-import { AuthService } from '../services/auth.service';
-import { catchError } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import {ModalController} from '@ionic/angular';
+import {AuthService} from '../services/auth.service';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth-login',

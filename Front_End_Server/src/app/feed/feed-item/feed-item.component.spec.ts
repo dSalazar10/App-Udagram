@@ -20,12 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FeedItemComponent } from './feed-item.component';
-import { feedItemMocks } from '../models/feed-item.model';
-import { FeedProviderService } from '../services/feed.provider.service';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FeedItemComponent} from './feed-item.component';
+import {feedItemMocks} from '../models/feed-item.model';
+import {FeedProviderService} from '../services/feed.provider.service';
 
 describe('FeedItemComponent', () => {
   let component: FeedItemComponent;
