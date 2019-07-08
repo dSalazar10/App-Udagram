@@ -1,4 +1,11 @@
-# Udagram
+![logo](logo.png)
+-------------------
+![pass](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg) 
+![Language](https://img.shields.io/badge/Language-Typescript-blue.svg)
+![size](https://img.shields.io/github/repo-size/dsalazar10/App-Udagram.svg)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/dsalazar10/App-Udagram.svg)
+
 This repo contains answers to the assignment. If you are currently taking the course, spoilers beware!
 
 ![](Project_Overview.png)
@@ -18,7 +25,7 @@ Tasks completed:
 - Login
 - Add image/comment
 
-4) Deploying a secong Nodejs/Express RestAPI server with the Image_Filter_Server
+4) Deploying a second Nodejs/Express RestAPI server with the Image_Filter_Server
 - Image processing with Jimp based on RESTful queries
 - Added features include basic authentication and URL validation
 
