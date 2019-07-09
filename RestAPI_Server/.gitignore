@@ -37,6 +37,7 @@ builds.txt
 Thumbs.db
 UserInterfaceState.xcuserstate
 node_modules
+package-lock.json
 venv/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
