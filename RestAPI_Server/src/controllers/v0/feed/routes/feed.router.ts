@@ -26,6 +26,7 @@ import {requireAuth} from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 import {config} from '../../../../config/config';
 import {s3} from '../../../../aws';
+import * as fs from 'fs';
 
 const router: Router = Router();
 const axios = require('axios');
@@ -168,19 +169,37 @@ async function filterImage(token: string, item: FeedItem, type: string, res: Res
             'Content-Type': 'application/json'
         }
     };
-    axios.post(path, data, headers).then( (getResponse: { data: any; }) => {
-            const f_image_name = 'filtered.' + item.url;
-            // Store the filtered image in S3
-            s3.putObject({
-                Body: getResponse.data,
-                Bucket: config.dev.aws_media_bucket,
-                Key: f_image_name
-            });
-            return 'filtered.' + item.url;
-        })
-        .catch(function (post_throw: any) {
-            console.log(`failed to post\n ${post_throw}`);
-        });
+    axios.post(path, data, headers).then( (getResponse: any) => {
+        res.send(getResponse.data);
+
+        // const fileName = `${__dirname}/filtered.${item.url}`;
+        // fs.writeFile(`${fileName}.1.png`, getResponse.data, (err) => {});
+        // const base64Image = Buffer.from(getResponse.data, 'binary').toString('base64');
+        // const decodedImage = Buffer.from(base64Image, 'base64').toString('binary');
+        // fs.writeFile(`${fileName}.2.png`, decodedImage, function(err) {});
+
+        // const encoded_data = getResponse.data.split(',')[1];
+        // const image_data = new Uint8Array(Buffer.from('Test'));
+        // fs.writeFile(fileName, image_data, (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log('File saved.');
+        //         res.sendFile(fileName);
+        //         // fs.readFile(fileName, function(err, fileData) {
+        //         //     s3.putObject({
+        //         //         Bucket: config.dev.aws_media_bucket,
+        //         //         Key: fileName,
+        //         //         Body: fileData
+        //         //     }, function(putObject_err, putObject_data) {
+        //         //         console.log('uploaded');
+        //         //     });
+        //         // });
+        //         return true;
+        //     }
+        // });
+
+    });
     return '';
 }
 
