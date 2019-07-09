@@ -170,6 +170,11 @@ async function filterImage(token: string, item: FeedItem, type: string, res: Res
         }
     };
     axios.post(path, data, headers).then( (getResponse: any) => {
+        
+        /* 
+        *  This is where the RestAPI server has successfully
+        *  received the image. I send it back to display
+        */
         res.send(getResponse.data);
 
         // const fileName = `${__dirname}/filtered.${item.url}`;
