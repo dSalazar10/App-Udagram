@@ -59,7 +59,7 @@ router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
     const { fileName } = req.params;
-    const url = AWS.getPutSignedUrl(fileName);
+    const url = AWS.getGetSignedUrl(fileName);
     res.status(201).send({url: url});
 });
 // update a specific resource
@@ -136,21 +136,7 @@ router.patch('/demo/:id', requireAuth, async (req: Request, res: Response) => {
         return res.status(400).send('item not found.');
     }
     filterImage(token_bearer[1], item, 'sepia', res).then( (response) => {
-        res.status(200);
-        // if (!f_image_name) {
-        //     // Update the item with the filtered url
-        //     item.update({
-        //         caption: item.caption,
-        //         originalUrl: item.originalUrl,
-        //         filterURL: f_image_name
-        //     }).then( (updated_item) => {
-        //         updated_item.originalUrl = AWS.getGetSignedUrl(updated_item.originalUrl);
-        //         updated_item.filterUrl = AWS.getGetSignedUrl(updated_item.filterUrl);
-        //         res.status(200).send(updated_item);
-        //     }).catch( (update_throw) => {
-        //         console.log(update_throw);
-        //     });
-        // }
+        res.status(200).send(response);
     });
 })
 
@@ -170,40 +156,16 @@ async function filterImage(token: string, item: FeedItem, type: string, res: Res
         }
     };
     axios.post(path, data, headers).then( (getResponse: any) => {
-        
-        /* 
-        *  This is where the RestAPI server has successfully
-        *  received the image. I send it back to display
-        */
-        res.send(getResponse.data);
-
-        // const fileName = `${__dirname}/filtered.${item.url}`;
-        // fs.writeFile(`${fileName}.1.png`, getResponse.data, (err) => {});
-        // const base64Image = Buffer.from(getResponse.data, 'binary').toString('base64');
-        // const decodedImage = Buffer.from(base64Image, 'base64').toString('binary');
-        // fs.writeFile(`${fileName}.2.png`, decodedImage, function(err) {});
-
-        // const encoded_data = getResponse.data.split(',')[1];
-        // const image_data = new Uint8Array(Buffer.from('Test'));
-        // fs.writeFile(fileName, image_data, (err) => {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
-        //         console.log('File saved.');
-        //         res.sendFile(fileName);
-        //         // fs.readFile(fileName, function(err, fileData) {
-        //         //     s3.putObject({
-        //         //         Bucket: config.dev.aws_media_bucket,
-        //         //         Key: fileName,
-        //         //         Body: fileData
-        //         //     }, function(putObject_err, putObject_data) {
-        //         //         console.log('uploaded');
-        //         //     });
-        //         // });
-        //         return true;
-        //     }
-        // });
-
+        // Upload the filtered image into the S3 bucket
+        // This uploads the raw image data and isn't viewable
+        s3.putObject({
+            Bucket: config.dev.aws_media_bucket,
+            Key: `filter.${item.url}`,
+            Body: getResponse.data
+        }, function(putObject_err, putObject_data) {
+            console.log('uploaded');
+        });
+        return getResponse.data;
     });
     return '';
 }
