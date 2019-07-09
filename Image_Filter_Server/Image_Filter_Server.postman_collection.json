@@ -883,6 +883,67 @@
 							"response": []
 						},
 						{
+							"name": "/api/v0/user/auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"body includes an email and token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.auth).to.eql(true);",
+											"    pm.expect(jsonData.user).to.not.eql(null);",
+											"    pm.expect(jsonData.token).to.not.eql(null)",
+											"    ",
+											"    pm.environment.set(\"token\", jsonData.token);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 600ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+								},
+								"url": {
+									"raw": "{{eb_host}}/api/v0/users/auth",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"users",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "/api/v0/user/auth/login",
 							"event": [
 								{
@@ -976,7 +1037,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYxMTA3OX0.or88ZC-KMJAEkMhrRpcDFhtFEjPZ62jZ1E_hqsvr5ko",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1030,7 +1091,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1083,7 +1144,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1136,7 +1197,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1190,7 +1251,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1243,7 +1304,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
 											"type": "string"
 										}
 									]
@@ -1704,25 +1765,25 @@
 	],
 	"variable": [
 		{
-			"id": "c956daba-1d35-4d57-8b27-38010dca4432",
+			"id": "52c7b4ee-4042-498c-b89a-a90969391547",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "4f2131b1-b571-4ae7-af40-bc7ef4ee32a2",
+			"id": "f04aabec-6e00-425a-b828-cba5d6528c75",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "e687756c-cc6a-41ad-8586-c06892764336",
+			"id": "75da80d9-88bf-495e-b99c-516db1ebde37",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "abbc1717-c9ce-458e-8001-ff5c3525c1ba",
+			"id": "3a750f63-d5db-4e8f-9f78-3bb88b983721",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
 			"type": "string"

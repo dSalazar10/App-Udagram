@@ -24,8 +24,11 @@ import {Router, Request, Response} from 'express';
 import {FeedItem} from '../models/FeedItem';
 import {requireAuth} from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
+import {config} from '../../../../config/config';
+import {s3} from '../../../../aws';
 
 const router: Router = Router();
+const axios = require('axios');
 
 /* Endpoints */
 
@@ -89,7 +92,7 @@ router.patch('/:id',
         updated_item.url = AWS.getGetSignedUrl(updated_item.url);
         res.status(200).send(updated_item);
 });
-// Update a specific image
+// Post an image
 router.post('/',
     requireAuth,
     async (req: Request, res: Response) => {
@@ -111,5 +114,74 @@ router.post('/',
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
     res.status(201).send(saved_item);
 });
+
+
+
+
+router.patch('/demo/:id', requireAuth, async (req: Request, res: Response) => {
+    // Required id parameter
+    const { id } = req.params;
+    // Verify parameters
+    if ( !id ) {
+        return res.status(400).send(`id is required.`);
+    }
+    const token_bearer = req.headers.authorization.split(' ');
+    if (token_bearer.length !== 2) {
+        return res.status(401).send({ message: 'Malformed token.' });
+    }
+    // Search for the image to be filtered
+    const item: FeedItem = await FeedItem.findByPk(id);
+    if (!item) {
+        return res.status(400).send('item not found.');
+    }
+    filterImage(token_bearer[1], item, 'sepia', res).then( (response) => {
+        res.status(200);
+        // if (!f_image_name) {
+        //     // Update the item with the filtered url
+        //     item.update({
+        //         caption: item.caption,
+        //         originalUrl: item.originalUrl,
+        //         filterURL: f_image_name
+        //     }).then( (updated_item) => {
+        //         updated_item.originalUrl = AWS.getGetSignedUrl(updated_item.originalUrl);
+        //         updated_item.filterUrl = AWS.getGetSignedUrl(updated_item.filterUrl);
+        //         res.status(200).send(updated_item);
+        //     }).catch( (update_throw) => {
+        //         console.log(update_throw);
+        //     });
+        // }
+    });
+})
+
+async function filterImage(token: string, item: FeedItem, type: string, res: Response): Promise<string> {
+    const host: string = config.dev.filter_host;
+    const image: string = AWS.getGetSignedUrl(item.url);
+    const path = `${host}/api/v0/filter/${type}?image_url=${image}`;
+    // Set the headers for the Filter Request
+    // Request for an image to be filtered
+    const data = JSON.stringify({
+        image_url: `${image}`
+    });
+    const headers = {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    };
+    axios.post(path, data, headers).then( (getResponse: { data: any; }) => {
+            const f_image_name = 'filtered.' + item.url;
+            // Store the filtered image in S3
+            s3.putObject({
+                Body: getResponse.data,
+                Bucket: config.dev.aws_media_bucket,
+                Key: f_image_name
+            });
+            return 'filtered.' + item.url;
+        })
+        .catch(function (post_throw: any) {
+            console.log(`failed to post\n ${post_throw}`);
+        });
+    return '';
+}
 
 export const FeedRouter: Router = router;
