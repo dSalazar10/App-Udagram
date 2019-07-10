@@ -24,7 +24,6 @@ import {Router, Request, Response} from 'express';
 import {requireAuth} from '../../users/routes/auth.router';
 import fs from 'fs';
 import Jimp = require('jimp');
-import {config} from '../../../../config/config';
 
 const router: Router = Router();
 

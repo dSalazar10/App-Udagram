@@ -115,36 +115,32 @@ router.post('/',
     res.status(201).send(saved_item);
 });
 
-
-
-
-router.patch('/demo/:id', requireAuth, async (req: Request, res: Response) => {
+// Filter an image
+router.patch('/filter/:id', requireAuth, async (req: Request, res: Response) => {
     // Required id parameter
     const { id } = req.params;
     // Verify parameters
     if ( !id ) {
         return res.status(400).send(`id is required.`);
     }
+    // Use the token of the user to login to the Image Filter Server
     const token_bearer = req.headers.authorization.split(' ');
     if (token_bearer.length !== 2) {
         return res.status(401).send({ message: 'Malformed token.' });
     }
-    // Search for the image to be filtered
+    // Search for the image to be filtered by id
     const item: FeedItem = await FeedItem.findByPk(id);
     if (!item) {
         return res.status(400).send('item not found.');
     }
-    filterImage(token_bearer[1], item, 'sepia', res).then( (response) => {
-        res.status(200);
-    });
-})
-
-async function filterImage(token: string, item: FeedItem, type: string, res: Response): Promise<string> {
+    // List of filters: grey, sepia, blur, gaussian, mirror, invert
+    const filter_type = 'sepia';
+    const token = token_bearer[1];
+    // URL of Image Filter Server
     const host: string = config.dev.filter_host;
     const image: string = AWS.getGetSignedUrl(item.url);
-    const path = `${host}/api/v0/filter/${type}?image_url=${image}`;
+    const path = `${host}/api/v0/filter/${filter_type}?image_url=${image}`;
     // Set the headers for the Filter Request
-    // Request for an image to be filtered
     const data = JSON.stringify({
         image_url: `${image}`
     });
@@ -154,12 +150,21 @@ async function filterImage(token: string, item: FeedItem, type: string, res: Res
             'Content-Type': 'application/json'
         }
     };
+    // Send a request to the Image Filter Server to filter an image
     axios.post(path, data, headers).then( (getResponse: any) => {
+        // Receives an images encoded in base64
         const image_data = getResponse.data;
-        AWS.uploadImage(`filter.${item.url}`, image_data);
-        return getResponse.data;
+        const filter_name = `filter.${item.url}`;
+
+        // Convert base64 to binary
+        const buf = Buffer.from(image_data, 'base64').toString();
+
+        // Upload directly
+        AWS.uploadImage(filter_name, buf);
+
+        // Send a signedURL to the image for viewing
+        res.status(200).send(AWS.getGetSignedUrl(filter_name));
     });
-    return '';
-}
+});
 
 export const FeedRouter: Router = router;
