@@ -1878,31 +1878,31 @@
 	],
 	"variable": [
 		{
-			"id": "5ebf1c5b-5aa2-44ff-b40d-e0e8d610d391",
+			"id": "8f05521b-bd58-4f92-9070-379913b793a7",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "3efc9de9-7ef6-4872-b838-ecee4262fd09",
+			"id": "fa47275d-1f4d-4ddf-b25f-22c8922c5b65",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "d70efc65-cd10-45c9-8941-a2fd88d08ed8",
+			"id": "394ab45d-3ce6-43a0-ad89-c7577080a67c",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "8d99dfec-1189-4084-852d-6e1b78003ce9",
+			"id": "e7327058-5d78-4a31-af7b-b1ca10b0cd27",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
 			"type": "string"
 		},
 		{
-			"id": "4a01d87e-b52e-4bb9-a697-4dbfb4fa3d02",
+			"id": "3cd84ef5-3a79-4a40-a131-afa5802228a4",
 			"key": "test",
 			"value": "https://udagramdanieldev.s3.us-east-2.amazonaws.com/xander0.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3ALGLWGRJTG2VHXF%2F20190709%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20190709T064000Z&X-Amz-Expires=300&X-Amz-Signature=09522a83f4a8abd911326c7799f4c9f6cbf44aac91dcde3dcf60cec5b4754810&X-Amz-SignedHeaders=host\n",
 			"type": "string"

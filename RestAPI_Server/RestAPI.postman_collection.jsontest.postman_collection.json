@@ -1555,13 +1555,13 @@
 	],
 	"variable": [
 		{
-			"id": "41c3ce2b-f54a-48f3-a863-d60992571c98",
+			"id": "b019c401-4840-42de-96ed-be7ee3a88678",
 			"key": "host",
 			"value": "http://localhost:8080",
 			"type": "string"
 		},
 		{
-			"id": "ef0ad7e4-1cb6-4ece-beac-c649ab43bb0c",
+			"id": "8cd0fb03-e00b-4735-add3-414252a551a5",
 			"key": "eb_host",
 			"value": "http://udagram-c2-restapi-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
