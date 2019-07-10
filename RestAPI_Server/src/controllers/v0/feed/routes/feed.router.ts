@@ -20,12 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import {Router, Request, Response} from 'express';
+import {Router, Request, Response, response} from 'express';
 import {FeedItem} from '../models/FeedItem';
 import {requireAuth} from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 import {config} from '../../../../config/config';
-import {s3} from '../../../../aws';
 import * as fs from 'fs';
 
 const router: Router = Router();
@@ -136,7 +135,7 @@ router.patch('/demo/:id', requireAuth, async (req: Request, res: Response) => {
         return res.status(400).send('item not found.');
     }
     filterImage(token_bearer[1], item, 'sepia', res).then( (response) => {
-        res.status(200).send(response);
+        res.status(200);
     });
 })
 
@@ -156,15 +155,8 @@ async function filterImage(token: string, item: FeedItem, type: string, res: Res
         }
     };
     axios.post(path, data, headers).then( (getResponse: any) => {
-        // Upload the filtered image into the S3 bucket
-        // This uploads the raw image data and isn't viewable
-        s3.putObject({
-            Bucket: config.dev.aws_media_bucket,
-            Key: `filter.${item.url}`,
-            Body: getResponse.data
-        }, function(putObject_err, putObject_data) {
-            console.log('uploaded');
-        });
+        const image_data = getResponse.data;
+        AWS.uploadImage(`filter.${item.url}`, image_data);
         return getResponse.data;
     });
     return '';

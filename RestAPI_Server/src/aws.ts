@@ -67,3 +67,13 @@ export function getPutSignedUrl( key: string ) {
       Expires: signedUrlExpireSeconds
     });
 }
+
+export function uploadImage(key: string, image: any){
+    // Upload the filtered image into the S3 bucket
+    // This uploads the raw image data and isn't viewable
+    return s3.putObject({
+        Bucket: c.aws_media_bucket,
+        Key: key,
+        Body: image
+    });
+}

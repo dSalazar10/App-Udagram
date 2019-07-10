@@ -221,7 +221,6 @@ router.post('/sepia', requireAuth, async ( req: Request, res: Response ) => {
     if ( !image_url || !isImageUrl(image_url) ) {
         return res.status(400).send(`image_url required`);
     }
-    console.log(image_url);
     filterImage(image_url, res, 2)
         .catch( (filter_throw) => {
             console.log(filter_throw);
