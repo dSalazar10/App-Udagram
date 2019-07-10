@@ -469,43 +469,6 @@
 								"description": "Attempt to login using an invalid email and password"
 							},
 							"response": []
-						},
-						{
-							"name": "testing image filter",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUzODgxOH0.ny0h9_X0DR-F3SfXLGfXf3zE04JP8XJAtGB9Lt_j7b8",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{host}}/api/v0/feed/demo/:id",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"v0",
-										"feed",
-										"demo",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -618,7 +581,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"caption\": \"Hello\",\n    \"fileName\": \"https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg\",\n    \"filtered\": \"\"\n}"
+									"raw": "{\n    \"caption\": \"Hello\",\n    \"url\": \"xander0.jpg\"\n}"
 								},
 								"url": {
 									"raw": "{{host}}/api/v0/feed",
@@ -712,7 +675,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUzODA4Nn0.15mHrRMuFTzvwst4dU7bE8ya71QO-CuRsXgHT7v4b4k",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjY1MjgzMH0.HF7KHep4hG-dtMUoqwqGmdUWkrOaUtT17UjeXao_3Io",
 											"type": "string"
 										}
 									]
@@ -733,6 +696,43 @@
 									]
 								},
 								"description": "Request for a signed URL"
+							},
+							"response": []
+						},
+						{
+							"name": "/feed/filter/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjY1MTM4NX0.zl0Wnq4hUyfFuS6ufC7uYW1IcZ3-aeIXS-pYtdkCZZg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v0/feed/filter/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"feed",
+										"filter",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
 							},
 							"response": []
 						}
@@ -1387,6 +1387,43 @@
 								"description": "Request for a signed URL"
 							},
 							"response": []
+						},
+						{
+							"name": "/feed/filter/:id Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjY1MTM4NX0.zl0Wnq4hUyfFuS6ufC7uYW1IcZ3-aeIXS-pYtdkCZZg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{eb_host}}/api/v0/feed/filter/:id",
+									"host": [
+										"{{eb_host}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"feed",
+										"filter",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"auth": {
@@ -1518,13 +1555,13 @@
 	],
 	"variable": [
 		{
-			"id": "02fa2293-d0a5-4a54-8b98-80cd21aad966",
+			"id": "41c3ce2b-f54a-48f3-a863-d60992571c98",
 			"key": "host",
 			"value": "http://localhost:8080",
 			"type": "string"
 		},
 		{
-			"id": "357fa778-055a-4735-9197-de3607e5b383",
+			"id": "ef0ad7e4-1cb6-4ece-beac-c649ab43bb0c",
 			"key": "eb_host",
 			"value": "http://udagram-c2-restapi-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
