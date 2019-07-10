@@ -32,6 +32,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -119,7 +122,7 @@
 					"name": "Authorized",
 					"item": [
 						{
-							"name": "/filter/grey?image_url",
+							"name": "/filter/grey",
 							"event": [
 								{
 									"listen": "test",
@@ -144,15 +147,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/grey",
 									"host": [
 										"{{host}}"
 									],
@@ -161,19 +175,13 @@
 										"v0",
 										"filter",
 										"grey"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/sepia?image_url",
+							"name": "/filter/sepia",
 							"event": [
 								{
 									"listen": "test",
@@ -198,15 +206,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjY1NDAwNH0.g9XKA-IM65o0PDQ5U_aEM9-dTVjUhgT1vBEBGbejaYE",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/sepia",
 									"host": [
 										"{{host}}"
 									],
@@ -215,19 +234,13 @@
 										"v0",
 										"filter",
 										"sepia"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/blur?image_url",
+							"name": "/filter/blur",
 							"event": [
 								{
 									"listen": "test",
@@ -251,15 +264,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/blur",
 									"host": [
 										"{{host}}"
 									],
@@ -268,19 +292,13 @@
 										"v0",
 										"filter",
 										"blur"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/gaussian?image_url",
+							"name": "/filter/gaussian",
 							"event": [
 								{
 									"listen": "test",
@@ -304,15 +322,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/gaussian",
 									"host": [
 										"{{host}}"
 									],
@@ -321,12 +350,6 @@
 										"v0",
 										"filter",
 										"gaussian"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								},
 								"description": "Slow!"
@@ -334,7 +357,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/mirror?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -358,15 +381,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/mirror",
 									"host": [
 										"{{host}}"
 									],
@@ -375,19 +409,13 @@
 										"v0",
 										"filter",
 										"mirror"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/invert?image_url",
+							"name": "/filter/invert",
 							"event": [
 								{
 									"listen": "test",
@@ -411,15 +439,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/invert",
 									"host": [
 										"{{host}}"
 									],
@@ -428,12 +467,6 @@
 										"v0",
 										"filter",
 										"invert"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
@@ -446,7 +479,7 @@
 					"name": "Unauthorized",
 					"item": [
 						{
-							"name": "/filter/grey?image_url",
+							"name": "/filter/grey",
 							"event": [
 								{
 									"listen": "test",
@@ -470,9 +503,20 @@
 									"type": "noauth"
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"raw": "{{host}}/api/v0/filter/grey",
 									"host": [
 										"{{host}}"
 									],
@@ -481,19 +525,13 @@
 										"v0",
 										"filter",
 										"grey"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/sepia?image_url",
+							"name": "/filter/sepia",
 							"event": [
 								{
 									"listen": "test",
@@ -517,7 +555,18 @@
 									"type": "noauth"
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{host}}/api/v0/filter/sepia?image_url={{SITE}}",
 									"host": [
@@ -540,7 +589,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/blur?image_url",
+							"name": "/filter/blur",
 							"event": [
 								{
 									"listen": "test",
@@ -571,7 +620,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{host}}/api/v0/filter/blur?image_url={{SITE}}",
 									"host": [
@@ -594,7 +654,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/gaussian?image_url",
+							"name": "/filter/gaussian",
 							"event": [
 								{
 									"listen": "test",
@@ -624,7 +684,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{host}}/api/v0/filter/gaussian?image_url={{SITE}}",
 									"host": [
@@ -647,7 +718,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/mirror?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -683,7 +754,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{host}}/api/v0/filter/mirror?image_url={{SITE}}",
 									"host": [
@@ -706,7 +788,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/invert?image_url",
+							"name": "/filter/invert",
 							"event": [
 								{
 									"listen": "test",
@@ -742,7 +824,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{host}}/api/v0/filter/invert?image_url={{SITE}}",
 									"host": [
@@ -771,7 +864,7 @@
 					"name": "Invalid",
 					"item": [
 						{
-							"name": "authorized-bad_url /filter/demo?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -809,10 +902,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+									"raw": "{\n\t\"image_url\":\"{{bad_site}}\"\n}"
 								},
 								"url": {
-									"raw": "{{host}}/api/v0/filter/mirror?image_url={{bad_site}}",
+									"raw": "{{host}}/api/v0/filter/mirror",
 									"host": [
 										"{{host}}"
 									],
@@ -821,12 +914,6 @@
 										"v0",
 										"filter",
 										"mirror"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{bad_site}}"
-										}
 									]
 								}
 							},
@@ -864,6 +951,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -879,67 +969,6 @@
 									]
 								},
 								"description": "Provides the visitor with a nice greeting"
-							},
-							"response": []
-						},
-						{
-							"name": "/api/v0/user/auth",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "dd89236b-7add-439a-947f-26d97b4dfbf3",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"",
-											"pm.test(\"body includes an email and token\", function () {",
-											"    var jsonData = pm.response.json();",
-											"    pm.expect(jsonData.auth).to.eql(true);",
-											"    pm.expect(jsonData.user).to.not.eql(null);",
-											"    pm.expect(jsonData.token).to.not.eql(null)",
-											"    ",
-											"    pm.environment.set(\"token\", jsonData.token);",
-											"});",
-											"",
-											"pm.test(\"Response time is less than 600ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(600);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
-								},
-								"url": {
-									"raw": "{{eb_host}}/api/v0/users/auth",
-									"host": [
-										"{{eb_host}}"
-									],
-									"path": [
-										"api",
-										"v0",
-										"users",
-										"auth"
-									]
-								}
 							},
 							"response": []
 						},
@@ -1012,7 +1041,7 @@
 					"name": "Authorized",
 					"item": [
 						{
-							"name": "/filter/grey?image_url",
+							"name": "/filter/grey",
 							"event": [
 								{
 									"listen": "test",
@@ -1037,15 +1066,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/grey",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1054,19 +1094,13 @@
 										"v0",
 										"filter",
 										"grey"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/sepia?image_url",
+							"name": "/filter/sepia",
 							"event": [
 								{
 									"listen": "test",
@@ -1077,8 +1111,8 @@
 											"    pm.response.to.have.status(200);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 2000ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1091,15 +1125,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjY1NDAwNH0.g9XKA-IM65o0PDQ5U_aEM9-dTVjUhgT1vBEBGbejaYE",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/sepia?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/sepia",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1108,19 +1153,13 @@
 										"v0",
 										"filter",
 										"sepia"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/blur?image_url",
+							"name": "/filter/blur",
 							"event": [
 								{
 									"listen": "test",
@@ -1130,8 +1169,8 @@
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
 											"});",
-											"pm.test(\"Response time is less than 2000ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1144,15 +1183,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/blur?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/blur",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1161,19 +1211,13 @@
 										"v0",
 										"filter",
 										"blur"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/gaussian?image_url",
+							"name": "/filter/gaussian",
 							"event": [
 								{
 									"listen": "test",
@@ -1183,8 +1227,8 @@
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
 											"});",
-											"pm.test(\"Response time is less than 7000ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(7000);",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1197,15 +1241,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/gaussian?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/gaussian",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1214,12 +1269,6 @@
 										"v0",
 										"filter",
 										"gaussian"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								},
 								"description": "Slow!"
@@ -1227,7 +1276,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/mirror?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -1237,8 +1286,8 @@
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
 											"});",
-											"pm.test(\"Response time is less than 2000ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1251,15 +1300,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/mirror",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1268,19 +1328,13 @@
 										"v0",
 										"filter",
 										"mirror"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/invert?image_url",
+							"name": "/filter/invert",
 							"event": [
 								{
 									"listen": "test",
@@ -1290,8 +1344,8 @@
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
 											"});",
-											"pm.test(\"Response time is less than 2000ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1304,15 +1358,26 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjYyOTAxOX0.t5QMHTUw0XZVdX_n2Ltq3I_c0EdZN2e2xQq_12x4MpI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjcyOTM3NH0.c7UQz0tMSZdGW6C9wNOMr2TSE7k_lcKROJUqjR2RqH4",
 											"type": "string"
 										}
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/invert?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/invert",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1321,12 +1386,6 @@
 										"v0",
 										"filter",
 										"invert"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
@@ -1339,7 +1398,7 @@
 					"name": "Unauthorized",
 					"item": [
 						{
-							"name": "/filter/grey?image_url",
+							"name": "/filter/grey",
 							"event": [
 								{
 									"listen": "test",
@@ -1350,8 +1409,8 @@
 											"    pm.response.to.have.status(401);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1363,9 +1422,20 @@
 									"type": "noauth"
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/grey?image_url={{SITE}}",
+									"raw": "{{eb_host}}/api/v0/filter/grey",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1374,19 +1444,13 @@
 										"v0",
 										"filter",
 										"grey"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{SITE}}"
-										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "/filter/sepia?image_url",
+							"name": "/filter/sepia",
 							"event": [
 								{
 									"listen": "test",
@@ -1397,8 +1461,8 @@
 											"    pm.response.to.have.status(401);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1410,7 +1474,18 @@
 									"type": "noauth"
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{eb_host}}/api/v0/filter/sepia?image_url={{SITE}}",
 									"host": [
@@ -1433,7 +1508,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/blur?image_url",
+							"name": "/filter/blur",
 							"event": [
 								{
 									"listen": "test",
@@ -1444,8 +1519,8 @@
 											"    pm.response.to.have.status(500);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1464,7 +1539,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{eb_host}}/api/v0/filter/blur?image_url={{SITE}}",
 									"host": [
@@ -1487,7 +1573,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/gaussian?image_url",
+							"name": "/filter/gaussian",
 							"event": [
 								{
 									"listen": "test",
@@ -1497,8 +1583,8 @@
 											"pm.test(\"Status code is 500\", function () {",
 											"    pm.response.to.have.status(500);",
 											"});",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1517,7 +1603,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{eb_host}}/api/v0/filter/gaussian?image_url={{SITE}}",
 									"host": [
@@ -1540,7 +1637,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/mirror?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -1551,8 +1648,8 @@
 											"    pm.response.to.have.status(500);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1576,7 +1673,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{SITE}}",
 									"host": [
@@ -1599,7 +1707,7 @@
 							"response": []
 						},
 						{
-							"name": "/filter/invert?image_url",
+							"name": "/filter/invert",
 							"event": [
 								{
 									"listen": "test",
@@ -1610,8 +1718,8 @@
 											"    pm.response.to.have.status(500);",
 											"});",
 											"",
-											"pm.test(\"Response time is less than 100ms\", function () {",
-											"    pm.expect(pm.response.responseTime).to.be.below(100);",
+											"pm.test(\"Response time is less than 20ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(20);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1635,7 +1743,18 @@
 									]
 								},
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"image_url\":\"{{SITE}}\"\n}"
+								},
 								"url": {
 									"raw": "{{eb_host}}/api/v0/filter/invert?image_url={{SITE}}",
 									"host": [
@@ -1664,7 +1783,7 @@
 					"name": "Invalid",
 					"item": [
 						{
-							"name": "authorized-bad_url /filter/demo?image_url",
+							"name": "/filter/mirror",
 							"event": [
 								{
 									"listen": "test",
@@ -1686,7 +1805,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxOTE4NH0.Syy3Gy-LQqRzAZzAsaZsTDo4KB6-wmzjSqyfgPCakiA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQHdvcmxkLmNvbSIsImlhdCI6MTU2MjUxNzY0M30.l99sPk-N-b2j4X33K3zjcqxEnWlELsKNDA2OeY3rSoo",
 											"type": "string"
 										}
 									]
@@ -1702,10 +1821,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\":\"hello@world.com\",\n\t\"password\":\"fancypass\"\n}"
+									"raw": "{\n\t\"image_url\":\"{{bad_site}}\"\n}"
 								},
 								"url": {
-									"raw": "{{eb_host}}/api/v0/filter/mirror?image_url={{bad_site}}",
+									"raw": "{{eb_host}}/api/v0/filter/mirror",
 									"host": [
 										"{{eb_host}}"
 									],
@@ -1714,12 +1833,6 @@
 										"v0",
 										"filter",
 										"mirror"
-									],
-									"query": [
-										{
-											"key": "image_url",
-											"value": "{{bad_site}}"
-										}
 									]
 								}
 							},
@@ -1765,27 +1878,33 @@
 	],
 	"variable": [
 		{
-			"id": "52c7b4ee-4042-498c-b89a-a90969391547",
+			"id": "5ebf1c5b-5aa2-44ff-b40d-e0e8d610d391",
 			"key": "host",
 			"value": "http://localhost:8082",
 			"type": "string"
 		},
 		{
-			"id": "f04aabec-6e00-425a-b828-cba5d6528c75",
+			"id": "3efc9de9-7ef6-4872-b838-ecee4262fd09",
 			"key": "SITE",
 			"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 			"type": "string"
 		},
 		{
-			"id": "75da80d9-88bf-495e-b99c-516db1ebde37",
+			"id": "d70efc65-cd10-45c9-8941-a2fd88d08ed8",
 			"key": "eb_host",
 			"value": "http://udagram-c2-imagefilter-dev.us-east-2.elasticbeanstalk.com",
 			"type": "string"
 		},
 		{
-			"id": "3a750f63-d5db-4e8f-9f78-3bb88b983721",
+			"id": "8d99dfec-1189-4084-852d-6e1b78003ce9",
 			"key": "bad_site",
 			"value": "https://www.youtube.com",
+			"type": "string"
+		},
+		{
+			"id": "4a01d87e-b52e-4bb9-a697-4dbfb4fa3d02",
+			"key": "test",
+			"value": "https://udagramdanieldev.s3.us-east-2.amazonaws.com/xander0.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3ALGLWGRJTG2VHXF%2F20190709%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20190709T064000Z&X-Amz-Expires=300&X-Amz-Signature=09522a83f4a8abd911326c7799f4c9f6cbf44aac91dcde3dcf60cec5b4754810&X-Amz-SignedHeaders=host\n",
 			"type": "string"
 		}
 	]

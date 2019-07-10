@@ -202,7 +202,7 @@ router.get( '/', async ( req, res ) => {
 // Grey Filter
 router.post('/grey', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.body;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -228,7 +228,7 @@ router.post('/sepia', requireAuth, async ( req: Request, res: Response ) => {
 // Blur Filter
 router.post('/blur', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.body;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -241,7 +241,7 @@ router.post('/blur', requireAuth, async ( req: Request, res: Response ) => {
 // Gaussian Filter
 router.post('/gaussian', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.body;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -254,7 +254,7 @@ router.post('/gaussian', requireAuth, async ( req: Request, res: Response ) => {
 // Mirror Filter
 router.post('/mirror', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.body;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);
@@ -267,7 +267,7 @@ router.post('/mirror', requireAuth, async ( req: Request, res: Response ) => {
 // Invert Filter
 router.post('/invert', requireAuth, async ( req: Request, res: Response ) => {
     // URL of a publicly accessible image
-    const { image_url } = req.query;
+    const { image_url } = req.body;
     // Verify query and validate url
     if ( !image_url || !isImageUrl(image_url) ) {
         res.status(400).send(`image_url required`);

@@ -58,7 +58,7 @@ router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
     const { fileName } = req.params;
-    const url = AWS.getGetSignedUrl(fileName);
+    const url = AWS.getPutSignedUrl(fileName);
     res.status(201).send({url: url});
 });
 // update a specific resource
@@ -116,6 +116,7 @@ router.post('/',
 });
 
 // Filter an image
+// TODO: Fix bug in image encoding
 router.patch('/filter/:id', requireAuth, async (req: Request, res: Response) => {
     // Required id parameter
     const { id } = req.params;
