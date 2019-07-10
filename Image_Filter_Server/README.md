@@ -136,7 +136,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 
 * Clone the repo
 ![](./tutorial/L2-2.png)
-* Open the RestAPI_Server folder in Visual Studio Code
+* Open the Image_Filter_Server folder in Visual Studio Code
 ![](./tutorial/L2-3.png)
 * Open a new terminal in Visual Studio Code
 * To install the project’s dependencies, type in `npm i` and press enter
@@ -157,8 +157,8 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   ![](./tutorial/L3-3a.png)
   * Click the ‘Choose Files’ button
   ![](./tutorial/L3-3b.png)
-  * Navigate to the RestAPI Server folder `App-Udagram-master > RestAPI_Server`
-  * Open ‘RestAPI.postman_collection.json’ file
+  * Navigate to the Image_Filter_Server Server folder `App-Udagram-master > Image_Filter_Server`
+  * Open ‘Image_Filter_Server.postman_collection.json’ file
   ![](./tutorial/L3-3d.png)
   * Click the ‘Collections’ button, below the ‘Import’ button
   ![](./tutorial/L3-3e.png)
