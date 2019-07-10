@@ -192,6 +192,17 @@ Authorized:
 
 @TODO Complete Cloud Testing Tutorial
 
+------------------------
+## Built With
+
+* [sequelize-typescript](https://www.npmjs.com/package/sequelize-typescript) a promise-based Node.js + typescrpt 
+Object-Relational Mapping for PostgresSQL.
+* [express](https://expressjs.com) framework helps us build our webserver. 
+* [bcrypt](https://www.npmjs.com/package/bcrypt) library helps us hash passwords.
+* [JsonWebToken](https://github.com/auth0/node-jsonwebtoken) library helps us manage tokens.
+* [connect](https://www.npmjs.com/package/connect) library helps us glue together middleware.
+* [email-validator](https://www.npmjs.com/package/email-validator) library helps us validate emails.
+* [body-parser](https://github.com/expressjs/body-parser) helps us parse, remove, and make use of inbound requests.
 
 
 ## Authors
