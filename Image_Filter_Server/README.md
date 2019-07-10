@@ -143,7 +143,7 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 ![](./tutorial/L2-5.png)
 * To start the server, type in `npm run dev`
 ![](./tutorial/L2-6.png)
-* The server can be located at `http://localhost:8080`
+* The server can be located at `http://localhost:8082`
 
 <a name="local-testing"></a>
 ### Running the local tests
