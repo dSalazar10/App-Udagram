@@ -195,21 +195,6 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
   ![](./tutorial/L3-3e.png)
   * Here you will find three folders to test different features
 
-Public:
-- test getting all the images in the feed
-- test getting a specific image
-- test creating a new user with valid credentials
-- test creating a new user with invalid credentials
-- test loggin in with valid credentials
-- test loggin in with invalid credentials
-
-Unauthorized:
-- test posting an image with invalid credentials
-
-Authorized: 
-- test posting an image with valid credentials and a malformed payload
-- test posting an image with valid credentials and valid payload
-
 
 ## AWS Cloud Development
 
