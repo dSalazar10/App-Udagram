@@ -67,3 +67,27 @@ export function getPutSignedUrl( key: string ) {
       Expires: signedUrlExpireSeconds
     });
 }
+
+/*
+* To ensure that data is not corrupted traversing the network,
+* use the Content-MD5 header. When you use this header,
+* Amazon S3 checks the object against the provided MD5 value
+* and, if they do not match, returns an error. Additionally,
+* you can calculate the MD5 while putting an object to Amazon
+* S3 and compare the returned ETag to the calculated MD5 value.
+* */
+// Upload the filtered image into the S3 bucket
+// This uploads the raw image data and isn't viewable
+export function uploadImage(key: string, image: string | Buffer) {
+    return s3.upload({
+        Body: JSON.stringify(image, null, 2),
+        Bucket: c.aws_media_bucket,
+        ContentType: 'image/png',
+        ContentEncoding: 'base64',
+        Key: key
+    }, function(err) {
+        if (err) {
+            console.log(err, err.stack);
+        }
+    });
+}

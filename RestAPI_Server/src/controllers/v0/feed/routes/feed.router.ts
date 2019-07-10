@@ -20,12 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-import {Router, Request, Response} from 'express';
+import {Router, Request, Response, response} from 'express';
 import {FeedItem} from '../models/FeedItem';
 import {requireAuth} from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
+import {config} from '../../../../config/config';
+import * as fs from 'fs';
 
 const router: Router = Router();
+const axios = require('axios');
 
 /* Endpoints */
 
@@ -89,7 +92,7 @@ router.patch('/:id',
         updated_item.url = AWS.getGetSignedUrl(updated_item.url);
         res.status(200).send(updated_item);
 });
-// Update a specific image
+// Post an image
 router.post('/',
     requireAuth,
     async (req: Request, res: Response) => {
@@ -110,6 +113,59 @@ router.post('/',
     const saved_item = await item.save();
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
     res.status(201).send(saved_item);
+});
+
+// Filter an image
+// TODO: Fix bug in image encoding
+router.patch('/filter/:id', requireAuth, async (req: Request, res: Response) => {
+    // Required id parameter
+    const { id } = req.params;
+    // Verify parameters
+    if ( !id ) {
+        return res.status(400).send(`id is required.`);
+    }
+    // Use the token of the user to login to the Image Filter Server
+    const token_bearer = req.headers.authorization.split(' ');
+    if (token_bearer.length !== 2) {
+        return res.status(401).send({ message: 'Malformed token.' });
+    }
+    // Search for the image to be filtered by id
+    const item: FeedItem = await FeedItem.findByPk(id);
+    if (!item) {
+        return res.status(400).send('item not found.');
+    }
+    // List of filters: grey, sepia, blur, gaussian, mirror, invert
+    const filter_type = 'sepia';
+    const token = token_bearer[1];
+    // URL of Image Filter Server
+    const host: string = config.dev.filter_host;
+    const image: string = AWS.getGetSignedUrl(item.url);
+    const path = `${host}/api/v0/filter/${filter_type}?image_url=${image}`;
+    // Set the headers for the Filter Request
+    const data = JSON.stringify({
+        image_url: `${image}`
+    });
+    const headers = {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    };
+    // Send a request to the Image Filter Server to filter an image
+    axios.post(path, data, headers).then( (getResponse: any) => {
+        // Receives an images encoded in base64
+        const image_data = getResponse.data;
+        const filter_name = `filter.${item.url}`;
+
+        // Convert base64 to binary
+        const buf = Buffer.from(image_data, 'base64').toString();
+
+        // Upload directly
+        AWS.uploadImage(filter_name, buf);
+
+        // Send a signedURL to the image for viewing
+        res.status(200).send(AWS.getGetSignedUrl(filter_name));
+    });
 });
 
 export const FeedRouter: Router = router;
