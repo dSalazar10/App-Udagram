@@ -15,7 +15,7 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 ### Rest API
 
-Base URL for Rest API is http://feed.udagram.me/api/v0
+Base URL for Rest API is [http://feed.udagram.me/api/v0](https://udagram-restapi-prod.us-east-2.elasticbeanstalk.com/api/v0)
 
 /feed
   - `GET /` get all images
@@ -36,7 +36,7 @@ Base URL for Rest API is http://feed.udagram.me/api/v0
 
  ### Image Filter
  
- Base URL for Image Filter API is http://filter.udagram.me/api/v0
+ Base URL for Image Filter API is [http://filter.udagram.me/api/v0](https://udagram-image-filter-prod.us-east-2.elasticbeanstalk.com/api/v0)
  
  Postman Collection can be found 
 [here](https://github.com/dSalazar10/App-Udagram/blob/master/Image_Filter_Server/Image_Filter_Server.postman_collection.json)
