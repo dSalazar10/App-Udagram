@@ -58,12 +58,55 @@ export function getGetSignedUrl( key: string ): string {
  *    a url as a string
  */
 export function getPutSignedUrl( key: string ) {
-
-    const signedUrlExpireSeconds = 60 * 5;
-
     return s3.getSignedUrl('putObject', {
       Bucket: c.aws_media_bucket,
       Key: key,
-      Expires: signedUrlExpireSeconds
+      Expires: 60 * 5
     });
 }
+
+/*
+* To ensure that data is not corrupted traversing the network,
+* use the Content-MD5 header. When you use this header,
+* Amazon S3 checks the object against the provided MD5 value
+* and, if they do not match, returns an error. Additionally,
+* you can calculate the MD5 while putting an object to Amazon
+* S3 and compare the returned ETag to the calculated MD5 value.
+* */
+// Upload the filtered image into the S3 bucket
+export function uploadImage(key: string, image: Buffer) {
+    return Promise.resolve( new Promise((res, rej) => {
+        s3.putObject({
+            Body: image,
+            Bucket: c.aws_media_bucket,
+            Key: key,
+            ACL: 'private',
+            ContentType: 'binary',
+            ServerSideEncryption: 'AES256'
+        }, function (err, data) {
+            if (err) {
+                return rej(err);
+            }
+            const eTag = data.ETag;
+            return res({ eTag });
+        });
+    }));
+}
+
+// Get an image from the S3 bucket
+export function getImage(key: string) {
+    return Promise.resolve( new Promise((res, rej) => {
+        s3.getObject({
+            Bucket: c.aws_media_bucket,
+            Key: key,
+        }, function(err, data) {
+            if (err) {
+                return rej(err);
+            }
+            const contentType = data.ContentType;
+            const image = data.Body;
+            return res({ image, contentType });
+        });
+    }));
+}
+

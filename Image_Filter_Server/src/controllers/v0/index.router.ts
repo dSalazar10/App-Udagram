@@ -41,7 +41,7 @@ router.get('/', async (req: Request, res: Response) => {
         '</head>\n' +
         '\n' +
         '<body>\n' +
-        '    <p>Use /v0 to access the API</p>\n' +
+        '    <p>Use /filter to access the API</p>\n' +
         '</body>\n' +
         '</html>\n');
 });
