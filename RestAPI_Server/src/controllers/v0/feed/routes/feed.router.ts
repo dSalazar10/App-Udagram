@@ -58,7 +58,7 @@ router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
     const { fileName } = req.params;
-    const url = AWS.getPutSignedUrl(fileName);
+    const url = AWS.getGetSignedUrl(fileName);
     res.status(201).send({url: url});
 });
 // update a specific resource
@@ -115,8 +115,29 @@ router.post('/',
     res.status(201).send(saved_item);
 });
 
+// Get an image
+router.get('/getImage/:id', requireAuth, async (req: Request, res: Response) => {
+    // Required id parameter
+    const { id } = req.params;
+    // Verify parameters
+    if ( !id ) {
+        return res.status(400).send(`id is required.`);
+    }
+    const item: FeedItem = await FeedItem.findByPk(id);
+    if (!item) {
+        return res.status(400).send('item not found.');
+    }
+    const filename = item.url;
+    AWS.getImage(filename).then( (data: any) => {
+        const img = Buffer.from(data.image.buffer, 'base64');
+        res.writeHead(200, {
+            'Content-Type': data.contentType
+        });
+        res.end(img);
+    });
+})
+
 // Filter an image
-// TODO: Fix bug in image encoding
 router.patch('/filter/:id', requireAuth, async (req: Request, res: Response) => {
     // Required id parameter
     const { id } = req.params;
@@ -153,18 +174,18 @@ router.patch('/filter/:id', requireAuth, async (req: Request, res: Response) => 
     };
     // Send a request to the Image Filter Server to filter an image
     axios.post(path, data, headers).then( (getResponse: any) => {
+        // TODO: Fix bug in image encoding
         // Receives an images encoded in base64
         const image_data = getResponse.data;
-        const filter_name = `filter.${item.url}`;
-
         // Convert base64 to binary
-        const buf = Buffer.from(image_data, 'base64').toString();
-
+        const img = Buffer.from(image_data, 'binary');
+        const filter_name = `filter.${item.url}`;
         // Upload directly
-        AWS.uploadImage(filter_name, buf);
-
+        AWS.uploadImage(filter_name, img).catch( (err) => {
+            console.log(err);
+        });
         // Send a signedURL to the image for viewing
-        res.status(200).send(AWS.getGetSignedUrl(filter_name));
+        res.status(200);
     });
 });
 
