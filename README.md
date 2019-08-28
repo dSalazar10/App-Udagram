@@ -11,7 +11,7 @@ This repo contains answers to the assignment. If you are currently taking the co
 
 
 ## Endpoints
-
+Note: Student AWS Credits exausted and endpoints are no longer accessible.
 
 ### Rest API
 
