@@ -1,6 +1,6 @@
 ![logo](logo.png)
 -------------------
-![pass](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![pass](https://img.shields.io/badge/build-failing-brightgreen.svg)
 ![GitHub](https://img.shields.io/github/license/dsalazar10/App-Udagram.svg)
 ![Language](https://img.shields.io/badge/Language-Typescript-blue.svg)
 ![size](https://img.shields.io/github/repo-size/dsalazar10/App-Udagram.svg)
