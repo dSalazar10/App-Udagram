@@ -199,15 +199,10 @@ testing purposes. See deployment for notes on how to deploy the project on a liv
 ## AWS Cloud Development
 
 <a name="cloud-deploy"></a>
-### Cloud Deployment
-
-@TODO: Complete Cloud Deployment Tutorial
-
 <a name="cloud-testing"></a>
-### Running the Cloud Tests
+### Cloud Deployment & Testing
 
-@TODO Complete Cloud Testing Tutorial
-
+Refer to my Cloud DevOps Engineer Repo [here](https://github.com/dSalazar10/Project-Dev_Ops_Engineering)
 
 ------------------------
 ## Built With
